@@ -21,11 +21,12 @@
 }
 *{box-sizing:border-box}
 body{
-  margin:0; font-family:-apple-system,BlinkMacSystemFont,
-  "SF Pro Text","SF Pro Display",system-ui,sans-serif;
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,
+    "SF Pro Text","SF Pro Display",system-ui,sans-serif;
   background:var(--bg); color:var(--text);
-  display:flex; justify-content:center; min-height:100vh;
-  text-align:center;
+  display:flex; justify-content:center;
+  min-height:100vh; text-align:center;
 }
 .container{max-width:460px;width:100%;padding:32px 20px}
 h1{margin:0;font-size:2.2rem;letter-spacing:-.02em}
@@ -34,21 +35,41 @@ h1{margin:0;font-size:2.2rem;letter-spacing:-.02em}
 .tagline{margin:18px 0;font-size:.85rem;color:var(--muted)}
 
 .required{
-  margin:20px 0 28px;padding:16px;border-radius:14px;
-  background:var(--button);border:1px solid var(--border)
+  margin:20px 0 28px;
+  padding:16px;
+  border-radius:14px;
+  background:var(--button);
+  border:1px solid var(--border);
 }
-.required-title{font-size:.9rem;font-weight:600;color:var(--warn)}
-.required-text{font-size:.75rem;color:var(--muted);line-height:1.4}
+.required-title{
+  font-size:.9rem;
+  font-weight:600;
+  color:var(--warn);
+  margin-bottom:6px;
+}
+.required-text{
+  font-size:.75rem;
+  color:var(--muted);
+  line-height:1.4;
+}
 .required a{color:var(--accent);text-decoration:none}
 
-.editions{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-@media(min-width:420px){.editions{grid-template-columns:repeat(3,1fr)}}
+.editions{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+@media(min-width:420px){
+  .editions{grid-template-columns:repeat(3,1fr)}
+}
 
 .edition-link{text-decoration:none;color:inherit}
 .edition{
-  padding:16px 12px;border-radius:14px;
-  background:var(--button);border:1px solid var(--border);
-  transition:background .15s ease
+  padding:16px 12px;
+  border-radius:14px;
+  background:var(--button);
+  border:1px solid var(--border);
+  transition:background .15s ease;
 }
 .edition:hover{background:var(--button-hover)}
 .edition-title{font-size:.9rem;font-weight:600}
@@ -57,19 +78,32 @@ h1{margin:0;font-size:2.2rem;letter-spacing:-.02em}
 .edition-note{margin-top:4px;font-size:.65rem;color:var(--accent)}
 
 .edition.unsupported{
-  opacity:.45; pointer-events:none;
+  opacity:.45;
 }
-.edition.unsupported .edition-support{
-  color:var(--muted);
+.edition.unsupported:hover{
+  background:var(--button);
 }
 
-.disclaimer{margin-top:32px;font-size:.7rem;color:var(--muted)}
+.edition-link.disabled{
+  pointer-events:none;
+}
+
+.disclaimer{
+  margin-top:32px;
+  font-size:.7rem;
+  color:var(--muted);
+}
 .disclaimer a{color:var(--accent);text-decoration:none}
 
 .blocked{
-  display:none;max-width:320px;padding:24px;margin:auto;
-  border-radius:16px;background:var(--button);
-  border:1px solid var(--border);font-size:.85rem
+  display:none;
+  max-width:320px;
+  padding:24px;
+  margin:auto;
+  border-radius:16px;
+  background:var(--button);
+  border:1px solid var(--border);
+  font-size:.85rem;
 }
 </style>
 </head>
@@ -86,64 +120,61 @@ by endlesspete inc partnered with
 
 <div class="tagline">Find your official Skylark edition</div>
 
+<!-- REQUIRED -->
 <div class="required">
-<div class="required-title">Required: Skylark Servers</div>
-<div class="required-text">
-Add the <a href="https://www.dropbox.com/scl/fo/9zq7kpz5zmcmuzfo8emer/AHGwiNEKuz9ujyF8geSKkqo?dl=0" target="_blank">
-Skylark Servers</a> folder to your Dropbox account.<br />
-Once you tap the link, you must wait for us to accept your invite.<br /><br />
-iOS only:
-<a href="https://apps.apple.com/app/dropbox/id327630330" target="_blank">
-Install Dropbox from the App Store
-</a>
-</div>
+  <div class="required-title">Required: Skylark Servers</div>
+  <div class="required-text">
+    Add the <a href="https://www.dropbox.com/scl/fo/9zq7kpz5zmcmuzfo8emer/AHGwiNEKuz9ujyF8geSKkqo?dl=0" target="_blank">
+    Skylark Servers folder</a> to your Dropbox account.<br />
+    Once you tap the link, you must wait for us to accept your invite.
+  </div>
 </div>
 
 <div class="editions">
 
-<a data-min="14.3" data-max="14.8" href="https://www.icloud.com/shortcuts/0e72496714944ee296007b436b4d3a8f" class="edition-link">
+<a class="edition-link" data-min="14.3" href="https://www.icloud.com/shortcuts/0e72496714944ee296007b436b4d3a8f">
 <div class="edition">
 <div class="edition-title">Edition 1</div>
 <div class="edition-version">Version 2.2</div>
 <div class="edition-support">iOS 14.3 – 14.8.1</div>
 </div></a>
 
-<a data-min="15.0" data-max="15.8" href="https://www.icloud.com/shortcuts/65a674774ee5475cba87bb8ad822b08a" class="edition-link">
+<a class="edition-link" data-min="15.0" href="https://www.icloud.com/shortcuts/65a674774ee5475cba87bb8ad822b08a">
 <div class="edition">
 <div class="edition-title">Edition 2</div>
 <div class="edition-version">Version 6.0</div>
 <div class="edition-support">iOS 15.0 – 15.8.3</div>
 </div></a>
 
-<a data-min="16.0" data-max="16.7" href="https://www.icloud.com/shortcuts/9c5bd486f48d4448b47bf423616ce882" class="edition-link">
+<a class="edition-link" data-min="16.0" href="https://www.icloud.com/shortcuts/9c5bd486f48d4448b47bf423616ce882">
 <div class="edition">
 <div class="edition-title">Edition 3</div>
 <div class="edition-version">Version 6.0</div>
 <div class="edition-support">iOS 16.0 – 16.7.12</div>
 </div></a>
 
-<a data-min="17.0" data-max="17.7" href="https://www.icloud.com/shortcuts/8753eef694b54d13b29821ee68343e32" class="edition-link">
+<a class="edition-link" data-min="17.0" href="https://www.icloud.com/shortcuts/8753eef694b54d13b29821ee68343e32">
 <div class="edition">
 <div class="edition-title">Edition 4</div>
 <div class="edition-version">Version 1.4</div>
 <div class="edition-support">iOS 17.0 – 17.7</div>
 </div></a>
 
-<a data-min="18.0" data-max="18.7" href="https://www.icloud.com/shortcuts/1f61f828cbf14f739117c164a4b5584a" class="edition-link">
+<a class="edition-link" data-min="18.0" href="https://www.icloud.com/shortcuts/1f61f828cbf14f739117c164a4b5584a">
 <div class="edition">
 <div class="edition-title">Edition 5</div>
 <div class="edition-version">Version 1.2</div>
 <div class="edition-support">iOS 18.0 – 18.7.3</div>
 </div></a>
 
-<a data-min="26.0" href="https://www.icloud.com/shortcuts/be3a7cda4c494f4cbff687259abbb47b" class="edition-link">
+<a class="edition-link" data-min="26.0" href="https://www.icloud.com/shortcuts/be3a7cda4c494f4cbff687259abbb47b">
 <div class="edition">
 <div class="edition-title">Edition 6</div>
 <div class="edition-version">Version 1.2</div>
 <div class="edition-support">iOS 26.0 and later</div>
 </div></a>
 
-<a data-min="18.0" href="https://endlesspete.github.io/16e/#" class="edition-link">
+<a class="edition-link" data-min="18.0" href="https://endlesspete.github.io/16e/#">
 <div class="edition">
 <div class="edition-title">Skylark e</div>
 <div class="edition-note">Non-Skylark Server</div>
@@ -164,23 +195,24 @@ Please come back on a supported device.
 </div>
 
 <script>
-const ua=navigator.userAgent;
-const iosMatch=ua.match(/OS (\d+)[._](\d+)/);
-const ios=iosMatch?parseFloat(`${iosMatch[1]}.${iosMatch[2]}`):null;
-const isApple=/iPhone|iPad|Macintosh/.test(ua)&&!/Android|Windows/.test(ua);
+const ua = navigator.userAgent;
+const iosMatch = ua.match(/OS (\d+)[._](\d+)/);
+const ios = iosMatch ? parseFloat(`${iosMatch[1]}.${iosMatch[2]}`) : null;
+const isApple = /iPhone|iPad|Macintosh/.test(ua) && !/Android|Windows/.test(ua);
 
-if(!isApple||(ios&&ios<14.3)){
-  app.style.display="none";
-  blocked.style.display="block";
+if (!isApple || (ios && ios < 14.3)) {
+  app.style.display = "none";
+  blocked.style.display = "block";
 }
 
-document.querySelectorAll(".edition-link").forEach(link=>{
-  const min=parseFloat(link.dataset.min||0);
-  const max=parseFloat(link.dataset.max||99);
-  if(ios&&(ios<min||ios>max)){
-    const card=link.querySelector(".edition");
+document.querySelectorAll(".edition-link").forEach(link => {
+  const min = parseFloat(link.dataset.min || 0);
+
+  if (ios && ios < min) {
+    link.classList.add("disabled");
+    const card = link.querySelector(".edition");
     card.classList.add("unsupported");
-    card.querySelector(".edition-support").textContent="Not supported";
+    card.querySelector(".edition-support").textContent = "Not supported";
   }
 });
 </script>
