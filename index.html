@@ -6,9 +6,6 @@
 
   <title>Undecimus</title>
 
-  <!-- ======================
-       SYSTEM DARK MODE
-       ====================== -->
   <style>
     :root {
       color-scheme: light dark;
@@ -33,14 +30,12 @@
       }
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
-                   "SF Pro Display", system-ui, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont,
+        "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       display: flex;
@@ -95,7 +90,6 @@
       border-radius: 14px;
       background: var(--button);
       border: 1px solid var(--border);
-      cursor: pointer;
       transition: background 0.15s ease;
     }
 
@@ -111,6 +105,12 @@
     .edition-version {
       margin-top: 6px;
       font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .edition-support {
+      margin-top: 4px;
+      font-size: 0.68rem;
       color: var(--muted);
     }
 
@@ -132,15 +132,14 @@
       border-radius: 16px;
       background: var(--button);
       border: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text);
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ======================
-       MAIN CONTENT
-       ====================== -->
   <div class="container" id="app">
     <h1>Undecimus</h1>
 
@@ -153,87 +152,91 @@
       Find your official Skylark edition
     </div>
 
-    <!-- ======================
-         EDITIONS
-         ====================== -->
     <div class="editions">
 
-      <!-- Edition 1 -->
       <a href="https://www.icloud.com/shortcuts/0e72496714944ee296007b436b4d3a8f" class="edition-link">
         <div class="edition">
           <div class="edition-title">Edition 1</div>
           <div class="edition-version">Version 2.2</div>
+          <div class="edition-support">iOS 14.3 – 14.8.1</div>
         </div>
       </a>
 
-      <!-- Edition 2 -->
       <a href="https://www.icloud.com/shortcuts/65a674774ee5475cba87bb8ad822b08a" class="edition-link">
         <div class="edition">
           <div class="edition-title">Edition 2</div>
           <div class="edition-version">Version 6.0</div>
+          <div class="edition-support">iOS 15.0 – 15.8.3</div>
         </div>
       </a>
 
-      <!-- Edition 3 -->
       <a href="https://www.icloud.com/shortcuts/9c5bd486f48d4448b47bf423616ce882" class="edition-link">
         <div class="edition">
           <div class="edition-title">Edition 3</div>
           <div class="edition-version">Version 6.0</div>
+          <div class="edition-support">iOS 16.0 – 16.7.12</div>
         </div>
       </a>
 
-      <!-- Edition 4 -->
       <a href="https://www.icloud.com/shortcuts/8753eef694b54d13b29821ee68343e32" class="edition-link">
         <div class="edition">
           <div class="edition-title">Edition 4</div>
           <div class="edition-version">Version 1.4</div>
+          <div class="edition-support">iOS 17.0 – 17.7</div>
         </div>
       </a>
 
-      <!-- Edition 5 -->
       <a href="https://www.icloud.com/shortcuts/1f61f828cbf14f739117c164a4b5584a" class="edition-link">
         <div class="edition">
           <div class="edition-title">Edition 5</div>
           <div class="edition-version">Version 1.2</div>
+          <div class="edition-support">iOS 18.0 – 18.7.3</div>
         </div>
       </a>
 
-      <!-- Edition 6 -->
       <a href="https://www.icloud.com/shortcuts/be3a7cda4c494f4cbff687259abbb47b" class="edition-link">
         <div class="edition">
           <div class="edition-title">Edition 6</div>
           <div class="edition-version">Version 1.2</div>
+          <div class="edition-support">iOS 26.0 and later</div>
         </div>
       </a>
 
     </div>
 
-    <!-- ======================
-         DISCLAIMER
-         ====================== -->
     <div class="disclaimer">
       this page is just for testing and may not last long<br />
       keep up to date @<a href="https://x.com/skylarkpress?s=21" target="_blank">SkylarkPress</a>
     </div>
   </div>
 
-  <!-- ======================
-       NON-APPLE BLOCK
-       ====================== -->
-  <div class="blocked" id="blocked">
+  <!-- iOS VERSION BLOCK -->
+  <div class="blocked" id="ios-block">
+    Skylark requires iOS 14.3 and later.<br /><br />
+    Come back on a supported device.
+  </div>
+
+  <!-- NON-APPLE BLOCK -->
+  <div class="blocked" id="device-block">
     This experience is limited to Apple devices.<br /><br />
     Please view on iPhone, iPad, or Mac.
   </div>
 
   <script>
     const ua = navigator.userAgent;
-    const isApple =
-      /iPhone|iPad|Macintosh/.test(ua) &&
-      !/Android|Windows/.test(ua);
+
+    const isApple = /iPhone|iPad|Macintosh/.test(ua) && !/Android|Windows/.test(ua);
+
+    // Extract iOS version (e.g., 14_2 -> 14.2)
+    const iosMatch = ua.match(/OS (\d+)[._](\d+)/);
+    const iosVersion = iosMatch ? parseFloat(`${iosMatch[1]}.${iosMatch[2]}`) : null;
 
     if (!isApple) {
       document.getElementById("app").style.display = "none";
-      document.getElementById("blocked").style.display = "block";
+      document.getElementById("device-block").style.display = "block";
+    } else if (iosVersion && iosVersion < 14.3) {
+      document.getElementById("app").style.display = "none";
+      document.getElementById("ios-block").style.display = "block";
     }
   </script>
 
