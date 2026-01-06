@@ -1,301 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Undecimus</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Undecimus</title>
 
-  <style>
-    :root {
-      color-scheme: light dark;
-      --bg: #0b0b0d;
-      --text: #f2f2f7;
-      --muted: #9a9aa1;
-      --button: #1c1c1e;
-      --button-hover: #2c2c2e;
-      --border: #2a2a2c;
-      --accent: #6aa9ff;
-      --warn: #ffcc66;
-    }
+<style>
+:root {
+  color-scheme: light dark;
+  --bg:#0b0b0d; --text:#f2f2f7; --muted:#9a9aa1;
+  --button:#1c1c1e; --button-hover:#2c2c2e;
+  --border:#2a2a2c; --accent:#6aa9ff; --warn:#ffcc66;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg:#f5f5f7; --text:#1c1c1e; --muted:#6e6e73;
+    --button:#fff; --button-hover:#eaeaee;
+    --border:#d1d1d6; --accent:#007aff; --warn:#9c6b00;
+  }
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:-apple-system,BlinkMacSystemFont,
+  "SF Pro Text","SF Pro Display",system-ui,sans-serif;
+  background:var(--bg); color:var(--text);
+  display:flex; justify-content:center; min-height:100vh;
+  text-align:center;
+}
+.container{max-width:460px;width:100%;padding:32px 20px}
+h1{margin:0;font-size:2.2rem;letter-spacing:-.02em}
+.subtitle{margin-top:6px;font-size:.95rem;color:var(--muted)}
+.subtitle a{color:var(--accent);text-decoration:none}
+.tagline{margin:18px 0;font-size:.85rem;color:var(--muted)}
 
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f5f5f7;
-        --text: #1c1c1e;
-        --muted: #6e6e73;
-        --button: #ffffff;
-        --button-hover: #eaeaee;
-        --border: #d1d1d6;
-        --accent: #007aff;
-        --warn: #9c6b00;
-      }
-    }
+.required{
+  margin:20px 0 28px;padding:16px;border-radius:14px;
+  background:var(--button);border:1px solid var(--border)
+}
+.required-title{font-size:.9rem;font-weight:600;color:var(--warn)}
+.required-text{font-size:.75rem;color:var(--muted);line-height:1.4}
+.required a{color:var(--accent);text-decoration:none}
 
-    * { box-sizing: border-box; }
+.editions{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:420px){.editions{grid-template-columns:repeat(3,1fr)}}
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont,
-        "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-    }
+.edition-link{text-decoration:none;color:inherit}
+.edition{
+  padding:16px 12px;border-radius:14px;
+  background:var(--button);border:1px solid var(--border);
+  transition:background .15s ease
+}
+.edition:hover{background:var(--button-hover)}
+.edition-title{font-size:.9rem;font-weight:600}
+.edition-version{margin-top:6px;font-size:.72rem;color:var(--muted)}
+.edition-support{margin-top:4px;font-size:.65rem;color:var(--muted)}
+.edition-note{margin-top:4px;font-size:.65rem;color:var(--accent)}
 
-    .container {
-      width: 100%;
-      max-width: 460px;
-      padding: 32px 20px;
-    }
+.edition.unsupported{
+  opacity:.45; pointer-events:none;
+}
+.edition.unsupported .edition-support{
+  color:var(--muted);
+}
 
-    h1 {
-      margin: 0;
-      font-size: 2.2rem;
-      letter-spacing: -0.02em;
-    }
+.disclaimer{margin-top:32px;font-size:.7rem;color:var(--muted)}
+.disclaimer a{color:var(--accent);text-decoration:none}
 
-    .subtitle {
-      margin-top: 6px;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    .subtitle a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .tagline {
-      margin: 18px 0 18px;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .required {
-      margin: 20px 0 28px;
-      padding: 16px;
-      border-radius: 14px;
-      background: var(--button);
-      border: 1px solid var(--border);
-    }
-
-    .required-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--warn);
-      margin-bottom: 6px;
-    }
-
-    .required-text {
-      font-size: 0.75rem;
-      color: var(--muted);
-      line-height: 1.4;
-    }
-
-    .required a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .editions {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    @media (min-width: 420px) {
-      .editions {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    .edition-link {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .edition {
-      padding: 16px 12px;
-      border-radius: 14px;
-      background: var(--button);
-      border: 1px solid var(--border);
-      transition: background 0.15s ease;
-    }
-
-    .edition:hover {
-      background: var(--button-hover);
-    }
-
-    .edition-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .edition-version {
-      margin-top: 6px;
-      font-size: 0.72rem;
-      color: var(--muted);
-    }
-
-    .edition-support {
-      margin-top: 4px;
-      font-size: 0.65rem;
-      color: var(--muted);
-    }
-
-    .edition-note {
-      margin-top: 4px;
-      font-size: 0.65rem;
-      color: var(--accent);
-    }
-
-    .disclaimer {
-      margin-top: 32px;
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
-    .disclaimer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .blocked {
-      display: none;
-      max-width: 320px;
-      padding: 24px;
-      border-radius: 16px;
-      background: var(--button);
-      border: 1px solid var(--border);
-      font-size: 0.85rem;
-      margin: auto;
-    }
-  </style>
+.blocked{
+  display:none;max-width:320px;padding:24px;margin:auto;
+  border-radius:16px;background:var(--button);
+  border:1px solid var(--border);font-size:.85rem
+}
+</style>
 </head>
 
 <body>
 
 <div class="container" id="app">
-  <h1>Undecimus</h1>
+<h1>Undecimus</h1>
 
-  <div class="subtitle">
-    by endlesspete inc partnered with
-    <a href="https://x.com/terralinkslabs?s=11" target="_blank">Terralinks Labs</a>
-  </div>
-
-  <div class="tagline">
-    Find your official Skylark edition
-  </div>
-
-  <!-- REQUIRED: SKYLARK SERVERS -->
-  <div class="required">
-    <div class="required-title">Required: Skylark Servers</div>
-    <div class="required-text">
-      Add the
-      <a href="https://www.dropbox.com/scl/fo/9zq7kpz5zmcmuzfo8emer/AHGwiNEKuz9ujyF8geSKkqo?dl=0" target="_blank">
-        Skylark Servers
-      </a>
-      folder to your Dropbox account.<br /><br />
-      Once you tap the link, you must wait for us to accept your invite.<br /><br />
-      iOS only:
-      <a href="https://apps.apple.com/app/dropbox/id327630330" target="_blank">
-        Install Dropbox from the App Store
-      </a>
-    </div>
-  </div>
-
-  <!-- EDITIONS -->
-  <div class="editions">
-
-    <a href="https://www.icloud.com/shortcuts/0e72496714944ee296007b436b4d3a8f" class="edition-link">
-      <div class="edition">
-        <div class="edition-title">Edition 1</div>
-        <div class="edition-version">Version 2.2</div>
-        <div class="edition-support">iOS 14.3 – 14.8.1</div>
-      </div>
-    </a>
-
-    <a href="https://www.icloud.com/shortcuts/65a674774ee5475cba87bb8ad822b08a" class="edition-link">
-      <div class="edition">
-        <div class="edition-title">Edition 2</div>
-        <div class="edition-version">Version 6.0</div>
-        <div class="edition-support">iOS 15.0 – 15.8.3</div>
-      </div>
-    </a>
-
-    <a href="https://www.icloud.com/shortcuts/9c5bd486f48d4448b47bf423616ce882" class="edition-link">
-      <div class="edition">
-        <div class="edition-title">Edition 3</div>
-        <div class="edition-version">Version 6.0</div>
-        <div class="edition-support">iOS 16.0 – 16.7.12</div>
-      </div>
-    </a>
-
-    <a href="https://www.icloud.com/shortcuts/8753eef694b54d13b29821ee68343e32" class="edition-link">
-      <div class="edition">
-        <div class="edition-title">Edition 4</div>
-        <div class="edition-version">Version 1.4</div>
-        <div class="edition-support">iOS 17.0 – 17.7</div>
-      </div>
-    </a>
-
-    <a href="https://www.icloud.com/shortcuts/1f61f828cbf14f739117c164a4b5584a" class="edition-link">
-      <div class="edition">
-        <div class="edition-title">Edition 5</div>
-        <div class="edition-version">Version 1.2</div>
-        <div class="edition-support">iOS 18.0 – 18.7.3</div>
-      </div>
-    </a>
-
-    <a href="https://www.icloud.com/shortcuts/be3a7cda4c494f4cbff687259abbb47b" class="edition-link">
-      <div class="edition">
-        <div class="edition-title">Edition 6</div>
-        <div class="edition-version">Version 1.2</div>
-        <div class="edition-support">iOS 26.0 and later</div>
-      </div>
-    </a>
-
-    <a href="https://endlesspete.github.io/16e/#" class="edition-link">
-      <div class="edition">
-        <div class="edition-title">Skylark e</div>
-        <div class="edition-note">Non-Skylark Server</div>
-        <div class="edition-support">iOS 18.0 and later</div>
-      </div>
-    </a>
-
-  </div>
-
-  <div class="disclaimer">
-    this page is just for testing and may not last long<br />
-    keep up to date @<a href="https://x.com/skylarkpress?s=21" target="_blank">SkylarkPress</a>
-  </div>
+<div class="subtitle">
+by endlesspete inc partnered with
+<a href="https://x.com/terralinkslabs?s=11" target="_blank">Terralinks Labs</a>
 </div>
 
-<!-- BLOCKED MESSAGE -->
-<div class="blocked" id="ios-block">
-  Skylark requires iOS or iPadOS 14.3 or later.<br /><br />
-  Please come back on a supported device.
+<div class="tagline">Find your official Skylark edition</div>
+
+<div class="required">
+<div class="required-title">Required: Skylark Servers</div>
+<div class="required-text">
+Add the <a href="https://www.dropbox.com/scl/fo/9zq7kpz5zmcmuzfo8emer/AHGwiNEKuz9ujyF8geSKkqo?dl=0" target="_blank">
+Skylark Servers</a> folder to your Dropbox account.<br />
+Once you tap the link, you must wait for us to accept your invite.<br /><br />
+iOS only:
+<a href="https://apps.apple.com/app/dropbox/id327630330" target="_blank">
+Install Dropbox from the App Store
+</a>
+</div>
+</div>
+
+<div class="editions">
+
+<a data-min="14.3" data-max="14.8" href="https://www.icloud.com/shortcuts/0e72496714944ee296007b436b4d3a8f" class="edition-link">
+<div class="edition">
+<div class="edition-title">Edition 1</div>
+<div class="edition-version">Version 2.2</div>
+<div class="edition-support">iOS 14.3 – 14.8.1</div>
+</div></a>
+
+<a data-min="15.0" data-max="15.8" href="https://www.icloud.com/shortcuts/65a674774ee5475cba87bb8ad822b08a" class="edition-link">
+<div class="edition">
+<div class="edition-title">Edition 2</div>
+<div class="edition-version">Version 6.0</div>
+<div class="edition-support">iOS 15.0 – 15.8.3</div>
+</div></a>
+
+<a data-min="16.0" data-max="16.7" href="https://www.icloud.com/shortcuts/9c5bd486f48d4448b47bf423616ce882" class="edition-link">
+<div class="edition">
+<div class="edition-title">Edition 3</div>
+<div class="edition-version">Version 6.0</div>
+<div class="edition-support">iOS 16.0 – 16.7.12</div>
+</div></a>
+
+<a data-min="17.0" data-max="17.7" href="https://www.icloud.com/shortcuts/8753eef694b54d13b29821ee68343e32" class="edition-link">
+<div class="edition">
+<div class="edition-title">Edition 4</div>
+<div class="edition-version">Version 1.4</div>
+<div class="edition-support">iOS 17.0 – 17.7</div>
+</div></a>
+
+<a data-min="18.0" data-max="18.7" href="https://www.icloud.com/shortcuts/1f61f828cbf14f739117c164a4b5584a" class="edition-link">
+<div class="edition">
+<div class="edition-title">Edition 5</div>
+<div class="edition-version">Version 1.2</div>
+<div class="edition-support">iOS 18.0 – 18.7.3</div>
+</div></a>
+
+<a data-min="26.0" href="https://www.icloud.com/shortcuts/be3a7cda4c494f4cbff687259abbb47b" class="edition-link">
+<div class="edition">
+<div class="edition-title">Edition 6</div>
+<div class="edition-version">Version 1.2</div>
+<div class="edition-support">iOS 26.0 and later</div>
+</div></a>
+
+<a data-min="18.0" href="https://endlesspete.github.io/16e/#" class="edition-link">
+<div class="edition">
+<div class="edition-title">Skylark e</div>
+<div class="edition-note">Non-Skylark Server</div>
+<div class="edition-support">iOS 18.0 and later</div>
+</div></a>
+
+</div>
+
+<div class="disclaimer">
+this page is just for testing and may not last long<br />
+keep up to date @<a href="https://x.com/skylarkpress?s=21" target="_blank">SkylarkPress</a>
+</div>
+</div>
+
+<div class="blocked" id="blocked">
+Skylark requires iOS or iPadOS 14.3 or later.<br /><br />
+Please come back on a supported device.
 </div>
 
 <script>
-  const ua = navigator.userAgent;
+const ua=navigator.userAgent;
+const iosMatch=ua.match(/OS (\d+)[._](\d+)/);
+const ios=iosMatch?parseFloat(`${iosMatch[1]}.${iosMatch[2]}`):null;
+const isApple=/iPhone|iPad|Macintosh/.test(ua)&&!/Android|Windows/.test(ua);
 
-  const isApple =
-    /iPhone|iPad|Macintosh/.test(ua) &&
-    !/Android|Windows/.test(ua);
+if(!isApple||(ios&&ios<14.3)){
+  app.style.display="none";
+  blocked.style.display="block";
+}
 
-  const iosMatch = ua.match(/OS (\d+)[._](\d+)/);
-  const iosVersion = iosMatch
-    ? parseFloat(`${iosMatch[1]}.${iosMatch[2]}`)
-    : null;
-
-  if (!isApple || (iosVersion && iosVersion < 14.3)) {
-    document.getElementById("app").style.display = "none";
-    document.getElementById("ios-block").style.display = "block";
+document.querySelectorAll(".edition-link").forEach(link=>{
+  const min=parseFloat(link.dataset.min||0);
+  const max=parseFloat(link.dataset.max||99);
+  if(ios&&(ios<min||ios>max)){
+    const card=link.querySelector(".edition");
+    card.classList.add("unsupported");
+    card.querySelector(".edition-support").textContent="Not supported";
   }
+});
 </script>
 
 </body>
