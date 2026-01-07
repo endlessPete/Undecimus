@@ -29,7 +29,7 @@ body{
   min-height:100vh; text-align:center;
 }
 .container{max-width:460px;width:100%;padding:32px 20px}
-h1{margin:0;font-size:2.2rem;letter-spacing:-.02em}
+h1{margin:0;font-size:2.2rem}
 .subtitle{margin-top:6px;font-size:.95rem;color:var(--muted)}
 .subtitle a{color:var(--accent);text-decoration:none}
 .tagline{margin:18px 0;font-size:.85rem;color:var(--muted)}
@@ -41,18 +41,8 @@ h1{margin:0;font-size:2.2rem;letter-spacing:-.02em}
   background:var(--button);
   border:1px solid var(--border);
 }
-.required-title{
-  font-size:.9rem;
-  font-weight:600;
-  color:var(--warn);
-  margin-bottom:6px;
-}
-.required-text{
-  font-size:.75rem;
-  color:var(--muted);
-  line-height:1.4;
-}
-.required a{color:var(--accent);text-decoration:none}
+.required-title{font-size:.9rem;font-weight:600;color:var(--warn)}
+.required-text{font-size:.75rem;color:var(--muted);line-height:1.4}
 
 .editions{
   display:grid;
@@ -76,23 +66,14 @@ h1{margin:0;font-size:2.2rem;letter-spacing:-.02em}
 .edition-support{margin-top:4px;font-size:.65rem;color:var(--muted)}
 .edition-note{margin-top:4px;font-size:.65rem;color:var(--accent)}
 
-.edition.unsupported{
-  opacity:.45;
-}
-.edition.unsupported:hover{
-  background:var(--button);
-}
-
-.edition-link.disabled{
-  pointer-events:none;
-}
+.edition.unsupported{opacity:.45}
+.edition-link.disabled{pointer-events:none}
 
 .disclaimer{
   margin-top:32px;
   font-size:.7rem;
   color:var(--muted);
 }
-.disclaimer a{color:var(--accent);text-decoration:none}
 
 .blocked{
   display:none;
@@ -102,7 +83,6 @@ h1{margin:0;font-size:2.2rem;letter-spacing:-.02em}
   border-radius:16px;
   background:var(--button);
   border:1px solid var(--border);
-  font-size:.85rem;
 }
 </style>
 </head>
@@ -122,12 +102,8 @@ by endlesspete inc partnered with
 <div class="required">
   <div class="required-title">Required: Skylark Servers</div>
   <div class="required-text">
-    Add the
-    <a href="https://www.dropbox.com/scl/fo/9zq7kpz5zmcmuzfo8emer/AHGwiNEKuz9ujyF8geSKkqo?dl=0" target="_blank">
-      Skylark Servers folder
-    </a>
-    to your Dropbox account.<br />
-    Once you tap the link, you must wait for us to accept your invite.
+    Add the Skylark Servers folder to your Dropbox account.<br />
+    Wait for approval after accepting the invite.
   </div>
 </div>
 
@@ -168,80 +144,60 @@ by endlesspete inc partnered with
 <div class="edition-support">iOS 18.0 – 18.7.3</div>
 </div></a>
 
-<a class="edition-link" data-requires="skylark26" href="https://www.icloud.com/shortcuts/be3a7cda4c494f4cbff687259abbb47b">
+<a class="edition-link" data-min="18.7" data-confirm="26" href="https://www.icloud.com/shortcuts/be3a7cda4c494f4cbff687259abbb47b">
 <div class="edition">
 <div class="edition-title">Edition 6</div>
 <div class="edition-version">Version 1.2</div>
-<div class="edition-support">iOS 26.0 and later</div>
-</div></a>
-
-<a class="edition-link" data-min="18" href="https://endlesspete.github.io/16e/#">
-<div class="edition">
-<div class="edition-title">Skylark e</div>
-<div class="edition-note">Non-Skylark Server</div>
-<div class="edition-support">iOS 18.0 and later</div>
+<div class="edition-support">iOS 26.0 and later*</div>
 </div></a>
 
 </div>
 
 <div class="disclaimer">
-this page is just for testing and may not last long<br />
-keep up to date @<a href="https://x.com/skylarkpress?s=21" target="_blank">SkylarkPress</a>
+* Safari reports iOS 26 devices as 18.7.<br />
+If this edition fails, use Edition 5 or below.
 </div>
 </div>
 
 <div class="blocked" id="blocked">
-Skylark requires iOS or iPadOS 14.3 or later.<br /><br />
-Please come back on a supported device.
+Skylark requires iOS or iPadOS 14.3 or later.
 </div>
 
 <script>
 const ua = navigator.userAgent;
-const isApple = /iPhone|iPad|Macintosh/.test(ua) && !/Android|Windows/.test(ua);
-
-// Apple lies after iOS 18 — DO NOT TRUST VERSION ALONE
-const match = ua.match(/OS (\d+)[._]/);
-const iosMajor = match ? parseInt(match[1], 10) : null;
+const match = ua.match(/OS (\d+)[._](\d+)?/);
+const ios = match ? parseFloat(match[1] + "." + (match[2] || "0")) : null;
 
 const app = document.getElementById("app");
 const blocked = document.getElementById("blocked");
 
-/* FUTURE-SAFE CHECK FOR EDITION 6 */
-function supportsSkylark26() {
-  return (
-    "scheduler" in window &&
-    "clipboard" in navigator &&
-    "navigation" in window &&
-    CSS.supports("color", "color(display-p3 1 0 0)")
-  );
-}
-
-/* HARD BLOCK */
-if (!isApple || (iosMajor !== null && iosMajor < 14)) {
+if (!/iPhone|iPad/.test(ua) || (ios && ios < 14.3)) {
   app.style.display = "none";
   blocked.style.display = "block";
 }
 
-/* EDITION GATING */
 document.querySelectorAll(".edition-link").forEach(link => {
-  const min = parseInt(link.dataset.min || "0", 10);
-  const requires = link.dataset.requires;
+  const min = parseFloat(link.dataset.min || "0");
+  const confirm26 = link.dataset.confirm;
   const card = link.querySelector(".edition");
   const support = link.querySelector(".edition-support");
 
-  let supported = true;
-
-  if (requires === "skylark26") {
-    supported = supportsSkylark26();
-  } else if (iosMajor !== null && iosMajor < min) {
-    supported = false;
-  }
-
-  if (!supported) {
+  if (ios && ios < min) {
     link.classList.add("disabled");
     card.classList.add("unsupported");
     support.textContent = "Not supported";
     link.removeAttribute("href");
+  }
+
+  if (confirm26) {
+    link.addEventListener("click", e => {
+      const ok = confirm(
+        "This edition requires iOS 26.0 or later.\n\n" +
+        "Safari may report your device as iOS 18.7.\n\n" +
+        "If this fails, please use Edition 5 or below."
+      );
+      if (!ok) e.preventDefault();
+    });
   }
 });
 </script>
