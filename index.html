@@ -69,7 +69,6 @@ h1{margin:0;font-size:2.2rem;letter-spacing:-.02em}
   border-radius:14px;
   background:var(--button);
   border:1px solid var(--border);
-  transition:background .15s ease;
 }
 .edition:hover{background:var(--button-hover)}
 .edition-title{font-size:.9rem;font-weight:600}
@@ -169,7 +168,7 @@ by endlesspete inc partnered with
 <div class="edition-support">iOS 18.0 – 18.7.3</div>
 </div></a>
 
-<a class="edition-link" data-min="26" href="https://www.icloud.com/shortcuts/be3a7cda4c494f4cbff687259abbb47b">
+<a class="edition-link" data-requires="skylark26" href="https://www.icloud.com/shortcuts/be3a7cda4c494f4cbff687259abbb47b">
 <div class="edition">
 <div class="edition-title">Edition 6</div>
 <div class="edition-version">Version 1.2</div>
@@ -200,26 +199,45 @@ Please come back on a supported device.
 const ua = navigator.userAgent;
 const isApple = /iPhone|iPad|Macintosh/.test(ua) && !/Android|Windows/.test(ua);
 
-// MAJOR iOS VERSION ONLY (future-safe)
+// Apple lies after iOS 18 — DO NOT TRUST VERSION ALONE
 const match = ua.match(/OS (\d+)[._]/);
 const iosMajor = match ? parseInt(match[1], 10) : null;
 
 const app = document.getElementById("app");
 const blocked = document.getElementById("blocked");
 
-// Block non-Apple OR iOS ≤ 14.2
+/* FUTURE-SAFE CHECK FOR EDITION 6 */
+function supportsSkylark26() {
+  return (
+    "scheduler" in window &&
+    "clipboard" in navigator &&
+    "navigation" in window &&
+    CSS.supports("color", "color(display-p3 1 0 0)")
+  );
+}
+
+/* HARD BLOCK */
 if (!isApple || (iosMajor !== null && iosMajor < 14)) {
   app.style.display = "none";
   blocked.style.display = "block";
 }
 
-// Enable / disable editions
+/* EDITION GATING */
 document.querySelectorAll(".edition-link").forEach(link => {
-  const min = parseInt(link.dataset.min, 10);
+  const min = parseInt(link.dataset.min || "0", 10);
+  const requires = link.dataset.requires;
   const card = link.querySelector(".edition");
   const support = link.querySelector(".edition-support");
 
-  if (iosMajor !== null && iosMajor < min) {
+  let supported = true;
+
+  if (requires === "skylark26") {
+    supported = supportsSkylark26();
+  } else if (iosMajor !== null && iosMajor < min) {
+    supported = false;
+  }
+
+  if (!supported) {
     link.classList.add("disabled");
     card.classList.add("unsupported");
     support.textContent = "Not supported";
