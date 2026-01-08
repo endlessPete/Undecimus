@@ -6,14 +6,14 @@
 <title>Undecimus</title>
 
 <style>
-:root {
-  color-scheme: light dark;
+:root{
+  color-scheme:light dark;
   --bg:#0b0b0d; --text:#f2f2f7; --muted:#9a9aa1;
   --button:#1c1c1e; --button-hover:#2c2c2e;
   --border:#2a2a2c; --accent:#6aa9ff; --warn:#ffcc66;
 }
-@media (prefers-color-scheme: light) {
-  :root {
+@media(prefers-color-scheme:light){
+  :root{
     --bg:#f5f5f7; --text:#1c1c1e; --muted:#6e6e73;
     --button:#fff; --button-hover:#eaeaee;
     --border:#d1d1d6; --accent:#007aff; --warn:#9c6b00;
@@ -29,6 +29,7 @@ body{
   min-height:100vh; text-align:center;
 }
 .container{max-width:460px;width:100%;padding:32px 20px}
+
 h1{margin:0;font-size:2.2rem}
 .subtitle{margin-top:6px;font-size:.95rem;color:var(--muted)}
 .subtitle a{color:var(--accent);text-decoration:none}
@@ -42,15 +43,11 @@ h1{margin:0;font-size:2.2rem}
   border:1px solid var(--border);
 }
 .required-title{
-  font-size:.9rem;
-  font-weight:600;
-  color:var(--warn);
-  margin-bottom:6px;
+  font-size:.9rem;font-weight:600;
+  color:var(--warn);margin-bottom:6px;
 }
 .required-text{
-  font-size:.75rem;
-  color:var(--muted);
-  line-height:1.4;
+  font-size:.75rem;color:var(--muted);line-height:1.4;
 }
 .required a{
   color:var(--accent);
@@ -78,24 +75,20 @@ h1{margin:0;font-size:2.2rem}
 .edition-support{margin-top:4px;font-size:.65rem;color:var(--muted)}
 .edition-note{margin-top:4px;font-size:.65rem;color:var(--accent)}
 
-.edition.unsupported{
-  opacity:.45;
-}
-.edition-link.disabled{
-  pointer-events:none;
-}
+.edition.unsupported{opacity:.45}
+.edition-link.disabled{pointer-events:none}
 
-/* TWO jumps only */
-@keyframes recommendNudge {
-  0%   { transform: translateY(0); }
-  10%  { transform: translateY(-6px); }
-  20%  { transform: translateY(0); }
-  40%  { transform: translateY(-6px); }
-  50%  { transform: translateY(0); }
-  100% { transform: translateY(0); }
+/* Mac Dock–style looping nudge */
+@keyframes dockNudge{
+  0%{transform:translateY(0)}
+  10%{transform:translateY(-6px)}
+  20%{transform:translateY(0)}
+  35%{transform:translateY(-6px)}
+  45%{transform:translateY(0)}
+  100%{transform:translateY(0)}
 }
 .edition.recommended{
-  animation: recommendNudge 1.8s ease-out 1;
+  animation:dockNudge 3.6s ease-in-out infinite;
   border-color:var(--accent);
 }
 
@@ -114,6 +107,7 @@ h1{margin:0;font-size:2.2rem}
   font-size:.7rem;
   color:var(--muted);
 }
+.disclaimer a{color:var(--accent);text-decoration:none}
 
 .blocked{
   display:none;
@@ -147,8 +141,8 @@ by endlesspete inc partnered with
     <a href="https://www.dropbox.com/scl/fo/9zq7kpz5zmcmuzfo8emer/AHGwiNEKuz9ujyF8geSKkqo?dl=0" target="_blank">
       Skylark Servers folder
     </a>
-    to your Dropbox account.<br />
-    Once you tap the link, you must wait for us to accept your invite.<br /><br />
+    to your Dropbox account.<br>
+    Once you tap the link, you must wait for us to accept your invite.<br><br>
     <a href="#" id="jump-to-e">Don’t want Skylark Servers? Use Skylark e</a>
   </div>
 </div>
@@ -158,6 +152,7 @@ by endlesspete inc partnered with
 <a class="edition-link" data-min="14.3" data-sky="true" href="#">
   <div class="edition">
     <div class="edition-title">Edition 1</div>
+    <div class="edition-version">Version 2.2</div>
     <div class="edition-support">iOS 14.3 – 14.8.1</div>
   </div>
 </a>
@@ -165,6 +160,7 @@ by endlesspete inc partnered with
 <a class="edition-link" data-min="15.0" data-sky="true" href="#">
   <div class="edition">
     <div class="edition-title">Edition 2</div>
+    <div class="edition-version">Version 6.0</div>
     <div class="edition-support">iOS 15.0 – 15.8.3</div>
   </div>
 </a>
@@ -172,6 +168,7 @@ by endlesspete inc partnered with
 <a class="edition-link" data-min="16.0" data-sky="true" href="#">
   <div class="edition">
     <div class="edition-title">Edition 3</div>
+    <div class="edition-version">Version 6.0</div>
     <div class="edition-support">iOS 16.0 – 16.7.12</div>
   </div>
 </a>
@@ -179,6 +176,7 @@ by endlesspete inc partnered with
 <a class="edition-link" data-min="17.0" data-sky="true" href="#">
   <div class="edition">
     <div class="edition-title">Edition 4</div>
+    <div class="edition-version">Version 1.4</div>
     <div class="edition-support">iOS 17.0 – 17.7</div>
   </div>
 </a>
@@ -186,6 +184,7 @@ by endlesspete inc partnered with
 <a class="edition-link" data-min="18.0" data-sky="true" href="#">
   <div class="edition">
     <div class="edition-title">Edition 5</div>
+    <div class="edition-version">Version 1.2</div>
     <div class="edition-support">iOS 18.0 – 18.7.3</div>
   </div>
 </a>
@@ -193,13 +192,14 @@ by endlesspete inc partnered with
 <a class="edition-link" data-min="26.0" data-sky="true" href="#">
   <div class="edition">
     <div class="edition-title">Edition 6</div>
+    <div class="edition-version">Version 1.2</div>
     <div class="edition-support">iOS 26.0 and later</div>
   </div>
 </a>
 
 <div class="divider">other Skylark versions</div>
 
-<a class="edition-link" data-min="18.0" id="skylark-e" href="https://endlesspete.github.io/16e/#">
+<a class="edition-link" id="skylark-e" data-min="18.0" href="https://endlesspete.github.io/16e/#">
   <div class="edition">
     <div class="edition-title">Skylark e</div>
     <div class="edition-note">Non-Skylark Server</div>
@@ -210,56 +210,52 @@ by endlesspete inc partnered with
 </div>
 
 <div class="disclaimer">
-this page is just for testing and may not last long
+this page is just for testing and may not last long<br>
+keep up to date @<a href="https://x.com/skylarkpress?s=21" target="_blank">SkylarkPress</a>
 </div>
 </div>
 
 <div class="blocked" id="blocked">
-Skylark requires iOS or iPadOS 14.3 or later.<br><br>
-Please come back on a supported device.
+Skylark requires iOS or iPadOS 14.3 or later.
 </div>
 
 <script>
-const ua = navigator.userAgent;
-const iosMatch = ua.match(/OS (\d+)[._](\d+)/);
-const ios = iosMatch ? parseFloat(`${iosMatch[1]}.${iosMatch[2]}`) : null;
+const ua=navigator.userAgent;
+const m=ua.match(/OS (\d+)[._](\d+)/);
+const ios=m?parseFloat(`${m[1]}.${m[2]}`):null;
 
-const app = document.getElementById("app");
-const blocked = document.getElementById("blocked");
-
-if (!ios || ios < 14.3) {
-  app.style.display = "none";
-  blocked.style.display = "block";
+if(!ios||ios<14.3){
+  app.style.display="none";
+  blocked.style.display="block";
 }
 
-let best = null;
-let bestMin = -1;
+let best=null,bestMin=-1;
 
-document.querySelectorAll(".edition-link").forEach(link => {
-  const min = parseFloat(link.dataset.min || 0);
-  const card = link.querySelector(".edition");
-  const support = card.querySelector(".edition-support");
+document.querySelectorAll(".edition-link").forEach(link=>{
+  const min=parseFloat(link.dataset.min||0);
+  const card=link.querySelector(".edition");
+  const support=card.querySelector(".edition-support");
 
-  if (ios < min) {
+  if(ios<min){
     link.classList.add("disabled");
     card.classList.add("unsupported");
-    support.textContent = "Not supported";
+    support.textContent="Not supported";
     link.removeAttribute("href");
-  } else if (min > bestMin) {
-    bestMin = min;
-    best = card;
+  }else if(link.dataset.sky==="true"&&min>bestMin){
+    bestMin=min;
+    best=card;
   }
 });
 
-if (best) best.classList.add("recommended");
+if(best)best.classList.add("recommended");
 
 /* Scroll + highlight Skylark e */
-document.getElementById("jump-to-e").onclick = e => {
+document.getElementById("jump-to-e").onclick=e=>{
   e.preventDefault();
-  const eCard = document.getElementById("skylark-e").querySelector(".edition");
-  eCard.scrollIntoView({behavior:"smooth",block:"center"});
-  eCard.style.boxShadow = "0 0 0 2px var(--accent)";
-  setTimeout(()=>eCard.style.boxShadow="",2000);
+  const c=document.getElementById("skylark-e").querySelector(".edition");
+  c.scrollIntoView({behavior:"smooth",block:"center"});
+  c.style.boxShadow="0 0 0 2px var(--accent)";
+  setTimeout(()=>c.style.boxShadow="",2000);
 };
 </script>
 
