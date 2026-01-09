@@ -9,21 +9,20 @@
 :root{
   color-scheme:light dark;
   --bg:#0b0b0d; --text:#f2f2f7; --muted:#9a9aa1;
-  --button:#1c1c1e; --button-hover:#2c2c2e;
-  --border:#2a2a2c; --accent:#6aa9ff; --warn:#ffcc66;
+  --button:#1c1c1e; --border:#2a2a2c;
+  --accent:#6aa9ff; --warn:#ffcc66;
 }
 @media(prefers-color-scheme:light){
   :root{
     --bg:#f5f5f7; --text:#1c1c1e; --muted:#6e6e73;
-    --button:#fff; --button-hover:#eaeaee;
-    --border:#d1d1d6; --accent:#007aff; --warn:#9c6b00;
+    --button:#fff; --border:#d1d1d6;
+    --accent:#007aff; --warn:#9c6b00;
   }
 }
 *{box-sizing:border-box}
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,
-    "SF Pro Text","SF Pro Display",system-ui,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui;
   background:var(--bg); color:var(--text);
   display:flex; justify-content:center;
   min-height:100vh; text-align:center;
@@ -42,17 +41,9 @@ h1{margin:0;font-size:2.2rem}
   background:var(--button);
   border:1px solid var(--border);
 }
-.required-title{
-  font-size:.9rem;font-weight:600;
-  color:var(--warn);margin-bottom:6px;
-}
-.required-text{
-  font-size:.75rem;color:var(--muted);line-height:1.4;
-}
-.required a{
-  color:var(--accent);
-  text-decoration:underline;
-}
+.required-title{font-size:.9rem;font-weight:600;color:var(--warn)}
+.required-text{font-size:.75rem;color:var(--muted);line-height:1.4}
+.required a{color:var(--accent)}
 
 .editions{
   display:grid;
@@ -78,21 +69,21 @@ h1{margin:0;font-size:2.2rem}
 .edition.unsupported{opacity:.45}
 .edition-link.disabled{pointer-events:none}
 
-/* Dock-style double-jump loop */
+/* infinite Mac Dock–style double jump */
 @keyframes dockNudge{
   0%{transform:translateY(0)}
-  8%{transform:translateY(-6px)}
-  16%{transform:translateY(0)}
-  26%{transform:translateY(-6px)}
-  36%{transform:translateY(0)}
+  10%{transform:translateY(-6px)}
+  20%{transform:translateY(0)}
+  30%{transform:translateY(-6px)}
+  40%{transform:translateY(0)}
   100%{transform:translateY(0)}
 }
 .edition.recommended{
-  animation:dockNudge 3.8s ease-in-out infinite;
+  animation:dockNudge 3.6s ease-in-out infinite;
   border-color:var(--accent);
 }
 
-/* Skylark e highlight (hot pink) */
+/* Skylark e pink highlight */
 .edition.skylark-e.highlighted{
   border-color:#FF69B4;
   box-shadow:0 0 0 2px rgba(255,105,180,.45);
@@ -103,17 +94,15 @@ h1{margin:0;font-size:2.2rem}
   margin:10px 0 4px;
   padding-top:14px;
   border-top:1px solid var(--border);
-  font-size:.7rem;
-  color:var(--muted);
+  font-size:.7rem;color:var(--muted);
   text-align:left;
 }
 
 .disclaimer{
   margin-top:32px;
-  font-size:.7rem;
-  color:var(--muted);
+  font-size:.7rem;color:var(--muted);
 }
-.disclaimer a{color:var(--accent);text-decoration:none}
+.disclaimer a{color:var(--accent)}
 
 .blocked{
   display:none;
@@ -135,7 +124,7 @@ h1{margin:0;font-size:2.2rem}
 
 <div class="subtitle">
 by endlesspete inc partnered with
-<a href="https://x.com/terralinkslabs?s=11" target="_blank">Terralinks Labs</a>
+<a href="#" target="_blank">Terralinks Labs</a>
 </div>
 
 <div class="tagline">Find your official Skylark edition</div>
@@ -155,45 +144,58 @@ by endlesspete inc partnered with
 
 <div class="editions">
 
-<a class="edition-link" data-min="14.3" data-sky="true" href="#">
-  <div class="edition"><div class="edition-title">Edition 1</div><div class="edition-version">Version 2.2</div><div class="edition-support">iOS 14.3 – 14.8.1</div></div>
-</a>
+<a class="edition-link" data-min="14.3" data-sky="true" href="#"><div class="edition">
+<div class="edition-title">Edition 1</div>
+<div class="edition-version">Version 2.2</div>
+<div class="edition-support">iOS 14.3 – 14.8.1</div>
+</div></a>
 
-<a class="edition-link" data-min="15.0" data-sky="true" href="#">
-  <div class="edition"><div class="edition-title">Edition 2</div><div class="edition-version">Version 6.0</div><div class="edition-support">iOS 15.0 – 15.8.3</div></div>
-</a>
+<a class="edition-link" data-min="15.0" data-sky="true" href="#"><div class="edition">
+<div class="edition-title">Edition 2</div>
+<div class="edition-version">Version 6.0</div>
+<div class="edition-support">iOS 15.0 – 15.8.3</div>
+</div></a>
 
-<a class="edition-link" data-min="16.0" data-sky="true" href="#">
-  <div class="edition"><div class="edition-title">Edition 3</div><div class="edition-version">Version 6.0</div><div class="edition-support">iOS 16.0 – 16.7.12</div></div>
-</a>
+<a class="edition-link" data-min="16.0" data-sky="true" href="#"><div class="edition">
+<div class="edition-title">Edition 3</div>
+<div class="edition-version">Version 6.0</div>
+<div class="edition-support">iOS 16.0 – 16.7.12</div>
+</div></a>
 
-<a class="edition-link" data-min="17.0" data-sky="true" href="#">
-  <div class="edition"><div class="edition-title">Edition 4</div><div class="edition-version">Version 1.4</div><div class="edition-support">iOS 17.0 – 17.7</div></div>
-</a>
+<a class="edition-link" data-min="17.0" data-sky="true" href="#"><div class="edition">
+<div class="edition-title">Edition 4</div>
+<div class="edition-version">Version 1.4</div>
+<div class="edition-support">iOS 17.0 – 17.7</div>
+</div></a>
 
-<a class="edition-link" data-min="18.0" data-sky="true" href="#">
-  <div class="edition"><div class="edition-title">Edition 5</div><div class="edition-version">Version 1.2</div><div class="edition-support">iOS 18.0 – 18.7.3</div></div>
-</a>
+<a class="edition-link" data-min="18.0" data-sky="true" href="#"><div class="edition">
+<div class="edition-title">Edition 5</div>
+<div class="edition-version">Version 1.2</div>
+<div class="edition-support">iOS 18.0 – 18.7.3</div>
+</div></a>
 
-<a class="edition-link" data-min="26.0" data-sky="true" href="#">
-  <div class="edition"><div class="edition-title">Edition 6</div><div class="edition-version">Version 1.2</div><div class="edition-support">iOS 26.0 and later</div></div>
-</a>
+<!-- Edition 6: allowed from 18.7+, prompt only -->
+<a class="edition-link" id="edition6" data-min="18.7" data-sky="true" href="#">
+<div class="edition">
+<div class="edition-title">Edition 6</div>
+<div class="edition-version">Version 1.2</div>
+<div class="edition-support">iOS 26.0 and later</div>
+</div></a>
 
 <div class="divider">other Skylark versions</div>
 
 <a class="edition-link" id="skylark-e" data-min="18.0" href="https://endlesspete.github.io/16e/#">
-  <div class="edition skylark-e">
-    <div class="edition-title">Skylark e</div>
-    <div class="edition-note">Non-Skylark Server</div>
-    <div class="edition-support">iOS 18.0 and later</div>
-  </div>
-</a>
+<div class="edition skylark-e">
+<div class="edition-title">Skylark e</div>
+<div class="edition-note">Non-Skylark Server</div>
+<div class="edition-support">iOS 18.0 and later</div>
+</div></a>
 
 </div>
 
 <div class="disclaimer">
 this page is just for testing and may not last long<br>
-keep up to date @<a href="https://x.com/skylarkpress?s=21" target="_blank">SkylarkPress</a>
+keep up to date @<a href="#">SkylarkPress</a>
 </div>
 </div>
 
@@ -202,32 +204,44 @@ Skylark requires iOS or iPadOS 14.3 or later.
 </div>
 
 <script>
-const ua=navigator.userAgent;
-const isApple=/iPhone|iPad|Macintosh/.test(ua);
-const m=ua.match(/OS (\d+)[._](\d+)/);
-const ios=m?parseFloat(`${m[1]}.${m[2]}`):null;
+const ua = navigator.userAgent;
+const isApple = /iPhone|iPad|Macintosh/.test(ua);
+const m = ua.match(/OS (\d+)[._](\d+)/);
+const ios = m ? parseFloat(`${m[1]}.${m[2]}`) : null;
 
-const app=document.getElementById("app");
-const blocked=document.getElementById("blocked");
+const app = document.getElementById("app");
+const blocked = document.getElementById("blocked");
 
-if(!isApple||!ios||ios<14.3){
-  app.style.display="none";
-  blocked.style.display="block";
+if (!isApple || !ios || ios < 14.3) {
+  app.style.display = "none";
+  blocked.style.display = "block";
 }
 
-let best=null,bestMin=-1;
+let best=null, bestMin=-1;
 
 document.querySelectorAll(".edition-link").forEach(link=>{
   const min=parseFloat(link.dataset.min||0);
   const card=link.querySelector(".edition");
   const support=card.querySelector(".edition-support");
 
-  if(ios<min){
+  if(ios < min){
     link.classList.add("disabled");
     card.classList.add("unsupported");
     support.textContent="Not supported";
     link.removeAttribute("href");
-  }else if(link.dataset.sky==="true"&&min>bestMin){
+    return;
+  }
+
+  if(link.id==="edition6" && !sessionStorage.getItem("edition6Prompt")){
+    link.addEventListener("click",()=>{
+      alert(
+        "Skylark (Edition 6) requires iOS or iPadOS 26.0 or later.\n\nIf this doesn’t work, use Edition 5."
+      );
+      sessionStorage.setItem("edition6Prompt","1");
+    },{once:true});
+  }
+
+  if(link.dataset.sky==="true" && min>bestMin){
     bestMin=min;
     best=card;
   }
@@ -235,13 +249,12 @@ document.querySelectorAll(".edition-link").forEach(link=>{
 
 if(best)best.classList.add("recommended");
 
-/* Scroll + hot-pink highlight Skylark e */
 document.getElementById("jump-to-e").onclick=e=>{
   e.preventDefault();
-  const card=document.querySelector(".skylark-e");
-  card.scrollIntoView({behavior:"smooth",block:"center"});
-  card.classList.add("highlighted");
-  setTimeout(()=>card.classList.remove("highlighted"),2200);
+  const c=document.querySelector(".skylark-e");
+  c.scrollIntoView({behavior:"smooth",block:"center"});
+  c.classList.add("highlighted");
+  setTimeout(()=>c.classList.remove("highlighted"),2200);
 };
 </script>
 
