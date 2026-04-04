@@ -10,95 +10,143 @@
 <style>
 :root{
   color-scheme:light dark;
-  --bg:#0b0b0d; --text:#f2f2f7; --muted:#9a9aa1;
-  --card:#1c1c1e; --border:#2a2a2c; --accent:#6aa9ff;
+  --bg:#0b0b0d;
+  --text:#f2f2f7;
+  --muted:#9a9aa1;
+  --card:#1c1c1e;
+  --border:#2a2a2c;
+  --accent:#6aa9ff;
 }
+
 @media(prefers-color-scheme:light){
   :root{
-    --bg:#f5f5f7; --text:#1c1c1e; --muted:#6e6e73;
-    --card:#ffffff; --border:#d1d1d6; --accent:#007aff;
+    --bg:#f5f5f7;
+    --text:#1c1c1e;
+    --muted:#6e6e73;
+    --card:#ffffff;
+    --border:#d1d1d6;
+    --accent:#007aff;
   }
 }
+
 body{
   margin:0;
   font-family:-apple-system,system-ui,sans-serif;
-  background:var(--bg); color:var(--text);
-  display:flex; justify-content:center;
+  background:var(--bg);
+  color:var(--text);
+  display:flex;
+  justify-content:center;
 }
-.container{max-width:460px;width:100%;padding:28px 18px}
+
+.container{
+  max-width:460px;
+  width:100%;
+  padding:28px 18px;
+}
 
 h1{margin:0;font-size:2.2rem}
+
 .subtitle{margin-top:6px;color:var(--muted)}
 .subtitle a{color:var(--accent);text-decoration:none}
+
 .tagline{margin:18px 0;color:var(--muted)}
 
 .required{
-  padding:16px;border-radius:16px;
-  background:var(--card);border:1px solid var(--border);
+  padding:16px;
+  border-radius:16px;
+  background:var(--card);
+  border:1px solid var(--border);
   margin-bottom:26px;
 }
-.required a{color:var(--accent);text-decoration:none}
+
+.required a{
+  color:var(--accent);
+  text-decoration:none;
+}
 
 .editions{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:14px;
 }
+
 @media(min-width:420px){
   .editions{grid-template-columns:repeat(3,1fr)}
 }
 
 .edition-link{text-decoration:none;color:inherit}
+
 .edition{
-  padding:16px;border-radius:16px;
+  padding:16px;
+  border-radius:16px;
   border:1px solid var(--border);
-  box-shadow:0 4px 10px rgba(0,0,0,.08);
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
   transition:.2s;
 }
+
 .edition:active{transform:scale(.97)}
 
-.ed1{background:#f2bcbc}
-.ed2{background:#f4d4b0}
-.ed3{background:#f6e8a6}
-.ed4{background:#d9ccf5}
-.ed5{background:#c7e8da}
-.ed6{background:#c9d7f2}
-.ed7{background:#dcdcdc}
-.skylark-e{background:#c8f7a8}
-.skylark-fe{background:#f7b5b5}
+/* Colors */
+.ed1{background:#e0a8a8}
+.ed2{background:#e6c39b}
+.ed3{background:#e6d98f}
+.ed4{background:#cbb8eb}
+.ed5{background:#b7dccb}
+.ed6{background:#b7c7e6}
+.ed7{background:#3a3a3c}
+.skylark-e{background:#b8e89a}
+.skylark-fe{background:#e8a0a0}
 
 .edition-title{font-weight:600}
-.edition-version,.edition-support,.edition-note{
-  font-size:.7rem;color:var(--muted);margin-top:4px;
+.edition-version,
+.edition-support,
+.edition-note{
+  font-size:.7rem;
+  color:var(--muted);
+  margin-top:4px;
 }
 
+/* Disabled */
 .unsupported{opacity:.4}
 .disabled{pointer-events:none}
 
+/* Bounce */
 @keyframes bounce{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-6px)}
 }
+
 .recommended{
-  animation:bounce 2.8s infinite;
+  animation:bounce 2.6s infinite;
   border-color:var(--accent);
 }
 
+/* Highlight */
 .highlight{
   border-color:#ff69b4;
   box-shadow:0 0 0 2px rgba(255,105,180,.4);
 }
 
 .divider{
-  grid-column:1/-1;margin-top:12px;padding-top:12px;
+  grid-column:1/-1;
+  margin-top:12px;
+  padding-top:12px;
   border-top:1px solid var(--border);
-  font-size:.75rem;color:var(--muted);text-align:left;
+  font-size:.75rem;
+  color:var(--muted);
+  text-align:left;
 }
 
 .footer{
-  margin-top:30px;font-size:.75rem;color:var(--muted);
+  margin-top:30px;
+  font-size:.75rem;
+  color:var(--muted);
 }
-.footer a{color:var(--accent);text-decoration:none}
+
+.footer a{
+  color:var(--accent);
+  text-decoration:none;
+}
 </style>
 </head>
 
@@ -116,61 +164,62 @@ by endlesspete inc partnered with
 <div class="tagline">Find your official Skylark edition</div>
 
 <div class="required">
-  <div><b>Required: Skylark Servers</b></div>
-  <div style="margin-top:6px">
-    <a href="https://www.dropbox.com/scl/fo/9zq7kpz5zmcmuzfo8emer/AHGwiNEKuz9ujyF8geSKkqo?dl=0" target="_blank">
-      Get Skylark Servers
-    </a><br><br>
-    <a href="#" id="jump">Don’t want Skylark Servers? Use Skylark e</a>
-  </div>
+<b>Required: Skylark Servers</b><br><br>
+
+<a href="https://www.dropbox.com/scl/fo/9zq7kpz5zmcmuzfo8emer/AHGwiNEKuz9ujyF8geSKkqo?dl=0" target="_blank">
+Get Skylark Servers
+</a>
+<br><br>
+
+<a href="#" id="jump">Don’t want Skylark Servers? Use Skylark e</a>
 </div>
 
 <div class="editions">
 
-<a class="edition-link" data-min="14.3" data-sky="true" href="https://www.icloud.com/shortcuts/0e72496714944ee296007b436b4d3a8f">
+<!-- Editions -->
+<a class="edition-link" data-min="14.3" data-max="14.8" data-sky="true" href="https://www.icloud.com/shortcuts/0e72496714944ee296007b436b4d3a8f">
 <div class="edition ed1">
 <div class="edition-title">Edition 1</div>
 <div class="edition-version">v2.2</div>
 <div class="edition-support">iOS 14.3–14.8.1</div>
 </div></a>
 
-<a class="edition-link" data-min="15.0" data-sky="true" href="https://www.icloud.com/shortcuts/65a674774ee5475cba87bb8ad822b08a">
+<a class="edition-link" data-min="15.0" data-max="15.8" data-sky="true" href="https://www.icloud.com/shortcuts/65a674774ee5475cba87bb8ad822b08a">
 <div class="edition ed2">
 <div class="edition-title">Edition 2</div>
 <div class="edition-version">v6.0</div>
-<div class="edition-support">iOS 15.0–15.8.3</div>
+<div class="edition-support">iOS 15.0–15.8</div>
 </div></a>
 
-<a class="edition-link" data-min="16.0" data-sky="true" href="https://www.icloud.com/shortcuts/9c5bd486f48d4448b47bf423616ce882">
+<a class="edition-link" data-min="16.0" data-max="16.7" data-sky="true" href="https://www.icloud.com/shortcuts/9c5bd486f48d4448b47bf423616ce882">
 <div class="edition ed3">
 <div class="edition-title">Edition 3</div>
 <div class="edition-version">v6.0</div>
-<div class="edition-support">iOS 16.0–16.7.12</div>
+<div class="edition-support">iOS 16.0–16.7</div>
 </div></a>
 
-<a class="edition-link" data-min="17.0" data-sky="true" href="https://www.icloud.com/shortcuts/8753eef694b54d13b29821ee68343e32">
+<a class="edition-link" data-min="17.0" data-max="17.7" data-sky="true" href="https://www.icloud.com/shortcuts/8753eef694b54d13b29821ee68343e32">
 <div class="edition ed4">
 <div class="edition-title">Edition 4</div>
 <div class="edition-version">v1.4</div>
 <div class="edition-support">iOS 17.0–17.7</div>
 </div></a>
 
-<a class="edition-link" data-min="18.0" data-sky="true" href="https://www.icloud.com/shortcuts/1f61f828cbf14f739117c164a4b5584a">
+<a class="edition-link" data-min="18.0" data-max="18.7" data-sky="true" href="https://www.icloud.com/shortcuts/1f61f828cbf14f739117c164a4b5584a">
 <div class="edition ed5">
 <div class="edition-title">Edition 5</div>
 <div class="edition-version">v1.2</div>
-<div class="edition-support">iOS 18.0–18.7.3</div>
+<div class="edition-support">iOS 18.0–18.7</div>
 </div></a>
 
-<a class="edition-link" data-min="18.8" data-sky="true"
-href="https://www.icloud.com/shortcuts/1808f5c3a3e74087bbece8a28a219d7e">
-  <div class="edition ed6">
-    <div class="edition-title">Edition 6</div>
-    <div class="edition-version">v1.4</div>
-    <div class="edition-support">iOS 26.0</div>
-  </div>
-</a>
+<a class="edition-link" data-min="26.0" data-max="26.5" data-sky="true" href="https://www.icloud.com/shortcuts/1808f5c3a3e74087bbece8a28a219d7e">
+<div class="edition ed6">
+<div class="edition-title">Edition 6</div>
+<div class="edition-version">v1.4</div>
+<div class="edition-support">iOS 26.0+</div>
+</div></a>
 
+<!-- Edition 7 -->
 <a class="edition-link disabled">
 <div class="edition ed7 unsupported">
 <div class="edition-title">Edition 7</div>
@@ -202,50 +251,57 @@ href="https://www.icloud.com/shortcuts/1808f5c3a3e74087bbece8a28a219d7e">
 </div>
 
 <script>
-const ua=navigator.userAgent;
-const m=ua.match(/OS (\\d+)[._](\\d+)/);
-const ios=m?parseFloat(`${m[1]}.${m[2]}`):null;
+const ua = navigator.userAgent;
+const m = ua.match(/OS (\d+)[._](\d+)/);
+const ios = m ? parseFloat(`${m[1]}.${m[2]}`) : null;
 
-let best=null,bestMin=-1;
+let best = null;
+let bestMin = -1;
 
-document.querySelectorAll(".edition-link").forEach(link=>{
-  const min=parseFloat(link.dataset.min||0);
-  const card=link.querySelector(".edition");
-  if(!card)return;
+document.querySelectorAll(".edition-link").forEach(link => {
+  const min = parseFloat(link.dataset.min || 0);
+  const max = parseFloat(link.dataset.max || 999);
+  const card = link.querySelector(".edition");
+  if (!card) return;
 
-  if(ios && ios<min){
+  if (!ios || ios < min || ios > max) {
     link.classList.add("disabled");
     card.classList.add("unsupported");
-  }else if(link.dataset.sky==="true" && min>bestMin){
-    bestMin=min;
-    best=card;
+    return;
+  }
+
+  if (link.dataset.sky === "true" && min > bestMin) {
+    bestMin = min;
+    best = card;
   }
 });
 
-if(best) best.classList.add("recommended");
+if (best) best.classList.add("recommended");
 
 /* Jump logic */
-const jump=document.getElementById("jump");
-const eCard=document.querySelector("#e .edition");
-const feCard=document.querySelector("#fe .edition");
+const jump = document.getElementById("jump");
+const eCard = document.querySelector("#e .edition");
+const feCard = document.querySelector("#fe .edition");
 
-if(ios>=15 && ios<=17.7){
-  jump.textContent="Don’t want Skylark Servers? Use Skylark Fe";
-  jump.onclick=(ev)=>{
-    ev.preventDefault();
-    feCard.scrollIntoView({behavior:"smooth",block:"center"});
+if (ios >= 15 && ios <= 17.7) {
+  jump.textContent = "Don’t want Skylark Servers? Use Skylark Fe";
+  jump.onclick = (e) => {
+    e.preventDefault();
+    feCard.scrollIntoView({ behavior: "smooth", block: "center" });
     feCard.classList.add("highlight");
-    setTimeout(()=>feCard.classList.remove("highlight"),2000);
+    setTimeout(() => feCard.classList.remove("highlight"), 2000);
   };
-}else if(ios>=18){
-  jump.onclick=(ev)=>{
-    ev.preventDefault();
-    eCard.scrollIntoView({behavior:"smooth",block:"center"});
+} 
+else if (ios >= 18) {
+  jump.onclick = (e) => {
+    e.preventDefault();
+    eCard.scrollIntoView({ behavior: "smooth", block: "center" });
     eCard.classList.add("highlight");
-    setTimeout(()=>eCard.classList.remove("highlight"),2000);
+    setTimeout(() => eCard.classList.remove("highlight"), 2000);
   };
-}else{
-  jump.style.display="none";
+} 
+else {
+  jump.style.display = "none";
 }
 </script>
 
