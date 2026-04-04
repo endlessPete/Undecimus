@@ -252,6 +252,7 @@ Get Skylark Servers
 
 <script>
 const ua = navigator.userAgent;
+const isApple = /iPhone|iPad|Macintosh/.test(ua) && !/Android/.test(ua);
 const m = ua.match(/OS (\d+)[._](\d+)/);
 const ios = m ? parseFloat(`${m[1]}.${m[2]}`) : null;
 
@@ -264,13 +265,22 @@ document.querySelectorAll(".edition-link").forEach(link => {
   const card = link.querySelector(".edition");
   if (!card) return;
 
-  if (!ios || ios < min || ios > max) {
+  // 📱 NON-APPLE → everything grayed but clickable
+  if (!isApple || !ios) {
+    card.classList.add("unsupported");
+    return;
+  }
+
+  // ❌ FUTURE versions only (disable ONLY if iOS is BELOW min)
+  if (ios < min) {
     link.classList.add("disabled");
     card.classList.add("unsupported");
     return;
   }
 
-  if (link.dataset.sky === "true" && min > bestMin) {
+  // ✅ VALID (past + current versions stay clickable)
+  // pick best recommendation ONLY within range
+  if (ios >= min && ios <= max && link.dataset.sky === "true" && min > bestMin) {
     bestMin = min;
     best = card;
   }
@@ -302,6 +312,16 @@ else if (ios >= 18) {
 } 
 else {
   jump.style.display = "none";
+}
+
+/* 📱 Non-Apple warning */
+if (!isApple) {
+  const msg = document.createElement("div");
+  msg.style.marginTop = "20px";
+  msg.style.fontSize = ".75rem";
+  msg.style.color = "var(--muted)";
+  msg.innerHTML = "⚠️ Skylark is designed for Apple devices. You can browse, but installation is not supported.";
+  document.querySelector(".container").appendChild(msg);
 }
 </script>
 
