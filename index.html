@@ -178,7 +178,7 @@ by endlesspete inc partnered with
 <script>
 const ua = navigator.userAgent;
 const isApple = /iPhone|iPad|Macintosh/.test(ua) && !/Android/.test(ua);
-const m = ua.match(/OS (\\d+)[._](\\d+)/);
+const m = ua.match(/OS (\d+)[._](\d+)/);
 const ios = m ? parseFloat(`${m[1]}.${m[2]}`) : null;
 
 let best=null,bestMin=-1;
