@@ -10,22 +10,25 @@
 <style>
 :root{
   color-scheme:light dark;
-  --bg:#0b0b0d;
-  --text:#f2f2f7;
-  --muted:#9a9aa1;
-  --card:#1c1c1e;
-  --border:#2a2a2c;
-  --accent:#6aa9ff;
+
+  --bg:#f5f5f7;
+  --text:#1c1c1e;
+  --muted:#6e6e73;
+
+  --card:#ffffff;
+  --border:#d1d1d6;
+  --accent:#007aff;
 }
 
-@media(prefers-color-scheme:light){
+@media(prefers-color-scheme:dark){
   :root{
-    --bg:#f5f5f7;
-    --text:#1c1c1e;
-    --muted:#6e6e73;
-    --card:#ffffff;
-    --border:#d1d1d6;
-    --accent:#007aff;
+    --bg:#0b0b0d;
+    --text:#f2f2f7;
+    --muted:#9a9aa1;
+
+    --card:#1c1c1e;
+    --border:#2a2a2c;
+    --accent:#6aa9ff;
   }
 }
 
@@ -35,24 +38,32 @@
 
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,
-  "SF Pro Display","SF Pro Text",system-ui,sans-serif;
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "SF Pro Display",
+  "SF Pro Text",
+  system-ui,
+  sans-serif;
+
   background:var(--bg);
   color:var(--text);
+
   display:flex;
   justify-content:center;
+
   min-height:100vh;
 }
 
 .container{
   width:100%;
-  max-width:460px;
-  padding:28px 18px 40px;
+  max-width:470px;
+  padding:30px 18px 40px;
 }
 
 h1{
   margin:0;
-  font-size:2.5rem;
+  font-size:2.6rem;
   font-weight:700;
   letter-spacing:-1px;
 }
@@ -75,23 +86,26 @@ h1{
 }
 
 .required{
-  padding:18px;
-  border-radius:22px;
   background:var(--card);
   border:1px solid var(--border);
-  margin-bottom:26px;
+
+  border-radius:26px;
+
+  padding:22px;
+  margin-bottom:28px;
+
   box-shadow:
-    0 1px 0 rgba(255,255,255,.04) inset,
-    0 8px 24px rgba(0,0,0,.08);
+  0 1px 0 rgba(255,255,255,.4) inset,
+  0 8px 24px rgba(0,0,0,.06);
 }
 
 .required-title{
-  font-size:1rem;
+  font-size:1.1rem;
   font-weight:700;
 }
 
 .required-links{
-  margin-top:10px;
+  margin-top:14px;
 }
 
 .required a{
@@ -103,13 +117,7 @@ h1{
 .editions{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-
-@media(min-width:420px){
-  .editions{
-    grid-template-columns:repeat(3,1fr);
-  }
+  gap:16px;
 }
 
 .edition-link{
@@ -119,38 +127,42 @@ h1{
 
 .edition{
   position:relative;
+
   padding:18px 16px;
-  border-radius:24px;
-  border:1px solid rgba(0,0,0,.06);
+
+  border-radius:28px;
+
+  border:1px solid rgba(0,0,0,.05);
+
   box-shadow:
-    0 1px 0 rgba(255,255,255,.4) inset,
-    0 10px 24px rgba(0,0,0,.08);
+  0 1px 0 rgba(255,255,255,.45) inset,
+  0 10px 24px rgba(0,0,0,.08);
+
   transition:
-    transform .18s ease,
-    box-shadow .18s ease,
-    border-color .18s ease,
-    opacity .18s ease;
-  overflow:hidden;
+  transform .18s ease,
+  border-color .18s ease,
+  box-shadow .18s ease,
+  opacity .18s ease;
 }
 
 .edition:active{
   transform:scale(.97);
 }
 
-.edition:hover{
-  transform:translateY(-2px);
-}
+/* Pastel cards */
 
-.ed1{background:#ffd9d9}
-.ed2{background:#ffe8cc}
-.ed3{background:#fff2bf}
-.ed4{background:#eadcff}
-.ed5{background:#daf5e8}
-.ed6{background:#dce7ff}
-.ed7{background:#e7e7ea}
+.ed1{background:#ffdede}
+.ed2{background:#ffedd9}
+.ed3{background:#fff5c9}
+.ed4{background:#efe3ff}
+.ed5{background:#dff6ea}
+.ed6{background:#dfe8ff}
+.ed7{background:#ececef}
 
-.skylark-e{background:#d8f7c4}
-.skylark-fe{background:#ffd8d8}
+.skylark-e{background:#dff8c8}
+.skylark-fe{background:#ffdcdc}
+
+/* Text */
 
 .edition-title{
   font-size:1rem;
@@ -159,71 +171,75 @@ h1{
 }
 
 .edition-version{
-  margin-top:6px;
+  margin-top:8px;
   font-size:.82rem;
-  color:rgba(0,0,0,.45);
+  color:var(--muted);
 }
 
 .edition-support,
 .edition-note{
   margin-top:4px;
-  font-size:.75rem;
-  color:rgba(0,0,0,.5);
+  font-size:.76rem;
+  color:var(--muted);
 }
 
-@media(prefers-color-scheme:dark){
-  .edition-version,
-  .edition-support,
-  .edition-note{
-    color:rgba(255,255,255,.58);
-  }
-}
+/* Unsupported ONLY */
 
 .unsupported{
   opacity:.42;
-}
-
-.disabled{
   pointer-events:none;
 }
+
+/* Bounce */
 
 @keyframes bounce{
   0%,100%{
     transform:translateY(0);
   }
   50%{
-    transform:translateY(-8px);
+    transform:translateY(-7px);
   }
 }
 
 .recommended{
   animation:bounce 2.8s ease-in-out infinite;
+
   border-color:var(--accent);
+
   box-shadow:
-    0 0 0 2px rgba(0,122,255,.18),
-    0 12px 28px rgba(0,0,0,.12);
+  0 0 0 2px rgba(0,122,255,.18),
+  0 12px 28px rgba(0,0,0,.12);
 }
+
+/* Highlight */
 
 .highlight{
   border-color:#ff69b4 !important;
+
   box-shadow:
-    0 0 0 3px rgba(255,105,180,.35),
-    0 12px 28px rgba(0,0,0,.12);
+  0 0 0 3px rgba(255,105,180,.35),
+  0 12px 28px rgba(0,0,0,.12);
 }
+
+/* Divider */
 
 .divider{
   grid-column:1/-1;
+
   margin-top:14px;
-  padding-top:16px;
+  padding-top:18px;
+
   border-top:1px solid var(--border);
+
   color:var(--muted);
   font-size:.78rem;
 }
 
+/* Footer */
+
 .footer{
   margin-top:34px;
-  font-size:.8rem;
-  color:var(--muted);
+  font-size:.82rem;
 }
 
 .footer a{
@@ -231,9 +247,43 @@ h1{
   text-decoration:none;
 }
 
-.notice{
-  margin-top:18px;
-  font-size:.78rem;
+/* BLOCKED SCREEN */
+
+.blocked{
+  display:none;
+
+  width:100%;
+  max-width:470px;
+
+  padding:26px 18px;
+}
+
+.blocked-card{
+  background:var(--card);
+
+  border:1px solid var(--border);
+
+  border-radius:28px;
+
+  padding:30px 24px;
+
+  text-align:center;
+
+  margin-top:60px;
+
+  box-shadow:
+  0 10px 30px rgba(0,0,0,.1);
+}
+
+.blocked-title{
+  font-size:1.5rem;
+  font-weight:700;
+}
+
+.blocked-text{
+  margin-top:14px;
+  font-size:1rem;
+  line-height:1.5;
   color:var(--muted);
 }
 </style>
@@ -241,7 +291,9 @@ h1{
 
 <body>
 
-<div class="container">
+<!-- MAIN -->
+
+<div class="container" id="app">
 
 <h1>Undecimus</h1>
 
@@ -257,24 +309,29 @@ Find your official Skylark edition
 </div>
 
 <div class="required">
-  <div class="required-title">
-    Required: Skylark Servers
-  </div>
 
-  <div class="required-links">
-    <a href="https://www.dropbox.com/scl/fo/9zq7kpz5zmcmuzfo8emer/AHGwiNEKuz9ujyF8geSKkqo?dl=0" target="_blank">
-      Get Skylark Servers
-    </a>
+<div class="required-title">
+Required: Skylark Servers
+</div>
 
-    <br><br>
+<div class="required-links">
 
-    <a href="#" id="jump">
-      Don’t want Skylark Servers? Use Skylark e
-    </a>
-  </div>
+<a href="https://www.dropbox.com/scl/fo/9zq7kpz5zmcmuzfo8emer/AHGwiNEKuz9ujyF8geSKkqo?dl=0" target="_blank">
+Get Skylark Servers
+</a>
+
+<br><br>
+
+<a href="#" id="jump">
+Don’t want Skylark Servers? Use Skylark e
+</a>
+
+</div>
 </div>
 
 <div class="editions">
+
+<!-- Edition 1 -->
 
 <a class="edition-link"
 data-min="14.3"
@@ -287,7 +344,10 @@ href="https://www.icloud.com/shortcuts/0e72496714944ee296007b436b4d3a8f">
 <div class="edition-version">v2.2</div>
 <div class="edition-support">iOS 14.3–14.8.1</div>
 </div>
+
 </a>
+
+<!-- Edition 2 -->
 
 <a class="edition-link"
 data-min="15.0"
@@ -300,7 +360,10 @@ href="https://www.icloud.com/shortcuts/65a674774ee5475cba87bb8ad822b08a">
 <div class="edition-version">v6.0</div>
 <div class="edition-support">iOS 15.0–15.8.7</div>
 </div>
+
 </a>
+
+<!-- Edition 3 -->
 
 <a class="edition-link"
 data-min="16.0"
@@ -313,7 +376,10 @@ href="https://www.icloud.com/shortcuts/9c5bd486f48d4448b47bf423616ce882">
 <div class="edition-version">v6.0</div>
 <div class="edition-support">iOS 16.0–16.7.15</div>
 </div>
+
 </a>
+
+<!-- Edition 4 -->
 
 <a class="edition-link"
 data-min="17.0"
@@ -326,7 +392,10 @@ href="https://www.icloud.com/shortcuts/8753eef694b54d13b29821ee68343e32">
 <div class="edition-version">v1.4</div>
 <div class="edition-support">iOS 17.0–17.7</div>
 </div>
+
 </a>
+
+<!-- Edition 5 -->
 
 <a class="edition-link"
 data-min="18.0"
@@ -339,7 +408,10 @@ href="https://www.icloud.com/shortcuts/1f61f828cbf14f739117c164a4b5584a">
 <div class="edition-version">v1.2</div>
 <div class="edition-support">iOS 18.0–18.7.7</div>
 </div>
+
 </a>
+
+<!-- Edition 6 -->
 
 <a class="edition-link"
 id="edition-6"
@@ -353,9 +425,12 @@ href="https://www.icloud.com/shortcuts/1808f5c3a3e74087bbece8a28a219d7e">
 <div class="edition-version">v1.4</div>
 <div class="edition-support">iOS 26.0–26.5</div>
 </div>
+
 </a>
 
-<a class="edition-link disabled">
+<!-- Edition 7 -->
+
+<a class="edition-link">
 
 <div class="edition ed7 unsupported">
 <div class="edition-title">Edition 7</div>
@@ -368,6 +443,8 @@ href="https://www.icloud.com/shortcuts/1808f5c3a3e74087bbece8a28a219d7e">
 other Skylark versions
 </div>
 
+<!-- Skylark e -->
+
 <a class="edition-link"
 id="e"
 href="https://endlesspete.github.io/16e/#">
@@ -379,6 +456,8 @@ href="https://endlesspete.github.io/16e/#">
 </div>
 
 </a>
+
+<!-- Skylark Fe -->
 
 <a class="edition-link"
 id="fe"
@@ -402,6 +481,34 @@ href="https://endlesspete.github.io/Fe/">
 
 </div>
 
+<!-- BLOCKED -->
+
+<div class="blocked" id="blocked">
+
+<div class="blocked-card">
+
+<div class="blocked-title">
+Unsupported Device
+</div>
+
+<div class="blocked-text">
+Undecimus only supports Apple devices running iOS 14.3 or later.
+<br><br>
+Please visit this site using:
+<br>
+• iPhone
+<br>
+• iPad
+<br>
+• iPod touch
+<br>
+• Mac
+</div>
+
+</div>
+
+</div>
+
 <script>
 const ua = navigator.userAgent;
 
@@ -411,23 +518,25 @@ const isApple =
 
 let ios = null;
 
-/* Compatibility OS */
+/* Main iOS */
+
 const osMatch =
 ua.match(/OS (\d+)[._](\d+)/);
 
-/* Real Safari version */
+/* Safari Version */
+
 const versionMatch =
 ua.match(/Version\/(\d+)\.(\d+)/);
 
 if(osMatch){
+
   ios = parseFloat(
     `${osMatch[1]}.${osMatch[2]}`
   );
+
 }
 
-/*
-  Fix iOS 26 compatibility mode
-*/
+/* iOS 26 Fix */
 
 if(versionMatch){
 
@@ -442,11 +551,34 @@ if(versionMatch){
     ios &&
     ios <= 18.7
   ){
+
     ios = parseFloat(
       `${safariMajor}.${safariMinor}`
     );
+
   }
 }
+
+/* Block unsupported */
+
+if(
+  !isApple ||
+  !ios ||
+  ios < 14.3
+){
+
+  document
+  .getElementById("app")
+  .style.display = "none";
+
+  document
+  .getElementById("blocked")
+  .style.display = "block";
+
+  throw new Error("Unsupported");
+}
+
+/* Recommendation */
 
 let best = null;
 let bestMin = -1;
@@ -466,18 +598,16 @@ document
 
   if(!card) return;
 
-  /*
-    Non Apple
-  */
+  /* ONLY gray out future versions */
 
-  if(!isApple || !ios){
+  if(ios < min){
+
     card.classList.add("unsupported");
+
     return;
   }
 
-  /*
-    Recommended
-  */
+  /* Recommended */
 
   if(
     ios >= min &&
@@ -485,49 +615,23 @@ document
     link.dataset.sky === "true" &&
     min > bestMin
   ){
+
     bestMin = min;
     best = card;
-  }
 
-  /*
-    Future unsupported
-  */
-
-  if(ios < min){
-
-    if(link.id === "edition-6"){
-
-      link.onclick = (e)=>{
-        e.preventDefault();
-
-        alert(
-          "iOS 26.0 required.\n\nIf it doesn’t work, use Edition 5."
-        );
-      };
-
-    }else{
-
-      card.classList.add("unsupported");
-    }
-  }
-
-  /*
-    Too old
-  */
-
-  if(ios > max){
-    card.classList.add("unsupported");
   }
 
 });
 
+/* Bounce */
+
 if(best){
+
   best.classList.add("recommended");
+
 }
 
-/*
-  Skylark e / Fe compatibility
-*/
+/* Skylark e / Fe */
 
 const eLink =
 document.getElementById("e");
@@ -541,31 +645,23 @@ eLink.querySelector(".edition");
 const feCard =
 feLink.querySelector(".edition");
 
-/*
-  iOS 15–17
-*/
+/* iOS 15–17 */
 
 if(ios >= 15 && ios <= 17.7){
 
-  eLink.classList.add("disabled");
   eCard.classList.add("unsupported");
 
 }
 
-/*
-  iOS 18+
-*/
+/* iOS 18+ */
 
-else if(ios >= 18){
+if(ios >= 18){
 
-  feLink.classList.add("disabled");
   feCard.classList.add("unsupported");
 
 }
 
-/*
-  Jump logic
-*/
+/* Jump logic */
 
 const jump =
 document.getElementById("jump");
@@ -587,10 +683,16 @@ if(ios >= 15 && ios <= 17.7){
     feCard.classList.add("highlight");
 
     setTimeout(()=>{
+
       feCard.classList.remove("highlight");
+
     },2000);
+
   };
+
 }
+
+/* iOS 18+ */
 
 else if(ios >= 18){
 
@@ -606,34 +708,19 @@ else if(ios >= 18){
     eCard.classList.add("highlight");
 
     setTimeout(()=>{
+
       eCard.classList.remove("highlight");
+
     },2000);
+
   };
+
 }
 
 else{
 
   jump.style.display = "none";
 
-}
-
-/*
-  Non Apple notice
-*/
-
-if(!isApple){
-
-  const msg =
-  document.createElement("div");
-
-  msg.className = "notice";
-
-  msg.innerHTML =
-  "⚠️ Skylark is designed for Apple devices.";
-
-  document
-  .querySelector(".container")
-  .appendChild(msg);
 }
 
 console.log("Detected iOS:", ios);
