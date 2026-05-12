@@ -120,6 +120,12 @@ h1{
   gap:16px;
 }
 
+@media(min-width:420px){
+  .editions{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
 .edition-link{
   text-decoration:none;
   color:inherit;
@@ -149,7 +155,7 @@ h1{
   transform:scale(.97);
 }
 
-/* Pastel cards */
+/* Pastels */
 
 .ed1{background:#ffdede}
 .ed2{background:#ffedd9}
@@ -183,11 +189,13 @@ h1{
   color:var(--muted);
 }
 
-/* Unsupported ONLY */
+/* Unsupported */
 
 .unsupported{
   opacity:.42;
   pointer-events:none;
+  user-select:none;
+  -webkit-user-select:none;
 }
 
 /* Bounce */
@@ -240,6 +248,7 @@ h1{
 .footer{
   margin-top:34px;
   font-size:.82rem;
+  text-align:center;
 }
 
 .footer a{
@@ -247,7 +256,7 @@ h1{
   text-decoration:none;
 }
 
-/* BLOCKED SCREEN */
+/* BLOCKED */
 
 .blocked{
   display:none;
@@ -351,7 +360,7 @@ href="https://www.icloud.com/shortcuts/0e72496714944ee296007b436b4d3a8f">
 
 <a class="edition-link"
 data-min="15.0"
-data-max="15.8.8"
+data-max="15.8"
 data-sky="true"
 href="https://www.icloud.com/shortcuts/65a674774ee5475cba87bb8ad822b08a">
 
@@ -367,7 +376,7 @@ href="https://www.icloud.com/shortcuts/65a674774ee5475cba87bb8ad822b08a">
 
 <a class="edition-link"
 data-min="16.0"
-data-max="16.7.16"
+data-max="16.7"
 data-sky="true"
 href="https://www.icloud.com/shortcuts/9c5bd486f48d4448b47bf423616ce882">
 
@@ -383,7 +392,7 @@ href="https://www.icloud.com/shortcuts/9c5bd486f48d4448b47bf423616ce882">
 
 <a class="edition-link"
 data-min="17.0"
-data-max="17.7.11"
+data-max="17.7"
 data-sky="true"
 href="https://www.icloud.com/shortcuts/8753eef694b54d13b29821ee68343e32">
 
@@ -399,7 +408,7 @@ href="https://www.icloud.com/shortcuts/8753eef694b54d13b29821ee68343e32">
 
 <a class="edition-link"
 data-min="18.0"
-data-max="18.7.8"
+data-max="18.7"
 data-sky="true"
 href="https://www.icloud.com/shortcuts/1f61f828cbf14f739117c164a4b5584a">
 
@@ -414,7 +423,6 @@ href="https://www.icloud.com/shortcuts/1f61f828cbf14f739117c164a4b5584a">
 <!-- Edition 6 -->
 
 <a class="edition-link"
-id="edition-6"
 data-min="26.0"
 data-max="26.5"
 data-sky="true"
@@ -474,9 +482,17 @@ href="https://endlesspete.github.io/Fe/">
 </div>
 
 <div class="footer">
+
 <a href="https://x.com/endlesspeteinc" target="_blank">
 @Endlesspeteinc
 </a>
+
+<br><br>
+
+<a href="https://x.com/Useskylark" target="_blank">
+@UseSkylark
+</a>
+
 </div>
 
 </div>
@@ -493,9 +509,13 @@ Unsupported Device
 
 <div class="blocked-text">
 Undecimus only supports Apple devices running iOS 14.3 or later.
+
 <br><br>
+
 Please visit this site using:
-<br>
+
+<br><br>
+
 • iPhone
 <br>
 • iPad
@@ -503,6 +523,7 @@ Please visit this site using:
 • iPod touch
 <br>
 • Mac
+
 </div>
 
 </div>
@@ -518,12 +539,12 @@ const isApple =
 
 let ios = null;
 
-/* Main iOS */
+/* Main iOS version */
 
 const osMatch =
 ua.match(/OS (\d+)[._](\d+)/);
 
-/* Safari Version */
+/* Safari version */
 
 const versionMatch =
 ua.match(/Version\/(\d+)\.(\d+)/);
@@ -536,7 +557,7 @@ if(osMatch){
 
 }
 
-/* iOS 26 Fix */
+/* iOS 26 fix */
 
 if(versionMatch){
 
@@ -557,9 +578,10 @@ if(versionMatch){
     );
 
   }
+
 }
 
-/* Block unsupported */
+/* Block unsupported devices */
 
 if(
   !isApple ||
@@ -576,9 +598,10 @@ if(
   .style.display = "block";
 
   throw new Error("Unsupported");
+
 }
 
-/* Recommendation */
+/* Recommendation logic */
 
 let best = null;
 let bestMin = -1;
@@ -587,27 +610,36 @@ document
 .querySelectorAll(".edition-link")
 .forEach(link=>{
 
-  const min =
-  parseFloat(link.dataset.min || 0);
-
-  const max =
-  parseFloat(link.dataset.max || 999);
-
   const card =
   link.querySelector(".edition");
 
   if(!card) return;
 
-  /* ONLY gray out future versions */
+  const min =
+  parseFloat(link.dataset.min || 0);
+
+  /* IMPORTANT:
+     ONLY disable FUTURE editions.
+     Older editions stay active.
+  */
 
   if(ios < min){
 
     card.classList.add("unsupported");
 
+    link.removeAttribute("href");
+
+    link.onclick = (e)=>{
+      e.preventDefault();
+      return false;
+    };
+
     return;
+
   }
 
-  /* Recommended */
+  const max =
+  parseFloat(link.dataset.max || 999);
 
   if(
     ios >= min &&
@@ -623,7 +655,7 @@ document
 
 });
 
-/* Bounce */
+/* Recommended bounce */
 
 if(best){
 
@@ -645,19 +677,23 @@ eLink.querySelector(".edition");
 const feCard =
 feLink.querySelector(".edition");
 
-/* iOS 15–17 */
+/* iOS 15–17 uses Fe */
 
-if(ios >= 15 && ios <= 17.7){
+if(ios >= 15 && ios < 18){
 
   eCard.classList.add("unsupported");
 
+  eLink.removeAttribute("href");
+
 }
 
-/* iOS 18+ */
+/* iOS 18+ uses e */
 
 if(ios >= 18){
 
   feCard.classList.add("unsupported");
+
+  feLink.removeAttribute("href");
 
 }
 
@@ -666,7 +702,7 @@ if(ios >= 18){
 const jump =
 document.getElementById("jump");
 
-if(ios >= 15 && ios <= 17.7){
+if(ios >= 15 && ios < 18){
 
   jump.textContent =
   "Don’t want Skylark Servers? Use Skylark Fe";
