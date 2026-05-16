@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Skylark</title>
+
+<link rel="icon" type="image/png" sizes="32x32"
+href="https://endlesspete.github.io/Medotdev/BBA22EA1-962D-44D9-B632-3E823FF06445.png">
+
+<link rel="apple-touch-icon"
+href="https://endlesspete.github.io/Medotdev/BBA22EA1-962D-44D9-B632-3E823FF06445.png">
+
+<style>
+
+:root{
+  color-scheme:light dark;
+
+  --bg:#f5f5f7;
+  --card:rgba(255,255,255,.72);
+
+  --text:#1c1c1e;
+  --muted:#6e6e73;
+
+  --accent:#007aff;
+  --border:rgba(0,0,0,.08);
+
+  --danger:#ff3b30;
+}
+
+@media(prefers-color-scheme:dark){
+
+  :root{
+
+    --bg:#0b0b0d;
+    --card:rgba(28,28,30,.72);
+
+    --text:#f2f2f7;
+    --muted:#9a9aa1;
+
+    --accent:#6aa9ff;
+    --border:rgba(255,255,255,.08);
+
+    --danger:#ff6961;
+
+  }
+
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  margin:0;
+  min-height:100%;
+}
+
+body{
+
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "SF Pro Display",
+  "SF Pro Text",
+  system-ui,
+  sans-serif;
+
+  background:
+  radial-gradient(circle at top,
+  rgba(0,122,255,.12),
+  transparent 40%),
+  var(--bg);
+
+  color:var(--text);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:24px;
+
+}
+
+/* Main card */
+
+.card{
+
+  width:100%;
+  max-width:420px;
+
+  background:var(--card);
+
+  backdrop-filter:blur(28px);
+  -webkit-backdrop-filter:blur(28px);
+
+  border:1px solid var(--border);
+
+  border-radius:34px;
+
+  padding:34px 28px;
+
+  text-align:center;
+
+  box-shadow:
+  0 10px 40px rgba(0,0,0,.12),
+  inset 0 1px 0 rgba(255,255,255,.25);
+
+}
+
+/* Logo */
+
+.logo{
+
+  width:74px;
+  height:74px;
+
+  border-radius:24px;
+
+  margin:0 auto 22px;
+
+  background:
+  linear-gradient(
+  135deg,
+  #79b8ff,
+  #007aff
+  );
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:
+  0 10px 24px rgba(0,122,255,.28);
+
+}
+
+.logo span{
+
+  color:white;
+  font-size:2rem;
+  font-weight:700;
+
+}
+
+/* Text */
+
+.title{
+
+  font-size:2rem;
+  font-weight:700;
+
+  letter-spacing:-1px;
+
+}
+
+.message{
+
+  margin-top:14px;
+
+  font-size:1.05rem;
+  line-height:1.5;
+
+  color:var(--muted);
+
+}
+
+.edition{
+
+  color:var(--text);
+  font-weight:700;
+
+}
+
+/* Button */
+
+.button{
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  margin-top:28px;
+
+  min-width:180px;
+  height:52px;
+
+  padding:0 26px;
+
+  border-radius:18px;
+
+  background:var(--accent);
+
+  color:white;
+
+  text-decoration:none;
+
+  font-size:1rem;
+  font-weight:600;
+
+  box-shadow:
+  0 10px 24px rgba(0,122,255,.24);
+
+  transition:
+  transform .16s ease,
+  opacity .16s ease;
+
+}
+
+.button:active{
+
+  transform:scale(.97);
+
+}
+
+.button.disabled{
+
+  opacity:.45;
+
+  pointer-events:none;
+
+  box-shadow:none;
+
+}
+
+/* Status */
+
+.status{
+
+  margin-top:14px;
+
+  font-size:.82rem;
+
+  color:var(--danger);
+
+}
+
+/* More editions */
+
+.more{
+
+  margin-top:18px;
+
+  font-size:.85rem;
+
+  color:var(--muted);
+
+}
+
+.more a{
+
+  color:var(--accent);
+  text-decoration:none;
+
+}
+
+/* Footer */
+
+.footer{
+
+  margin-top:34px;
+
+  font-size:.82rem;
+
+  color:var(--muted);
+
+  line-height:1.8;
+
+}
+
+.footer a{
+
+  color:var(--accent);
+  text-decoration:none;
+
+}
+
+/* Floating animation */
+
+@keyframes floaty{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-6px);
+  }
+
+}
+
+.floating{
+
+  animation:floaty 3s ease-in-out infinite;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card floating">
+
+  <div class="logo">
+    <span>☁️</span>
+  </div>
+
+  <div class="title">
+    Skylark
+  </div>
+
+  <div class="message" id="message">
+    Detecting your supported edition...
+  </div>
+
+  <a
+  class="button"
+  id="button"
+  href="#">
+    Get Skylark
+  </a>
+
+  <div class="status" id="status"></div>
+
+  <div class="more">
+    find more editions at
+    <a href="https://endlesspete.github.io/Undecimus/" target="_blank">
+      Undecimus
+    </a>
+  </div>
+
+  <div class="footer">
+
+    <a href="https://x.com/endlesspeteinc" target="_blank">
+      @Endlesspeteinc
+    </a>
+
+    <br>
+
+    <a href="https://x.com/Useskylark" target="_blank">
+      @UseSkylark
+    </a>
+
+  </div>
+
+</div>
+
+<script>
+
+/* Detect */
+
+const ua = navigator.userAgent;
+
+const isApple =
+/iPhone|iPad|Macintosh/.test(ua) &&
+!/Android/.test(ua);
+
+let ios = null;
+
+/* Main iOS version */
+
+const osMatch =
+ua.match(/OS (\d+)[._](\d+)/);
+
+/* Safari version */
+
+const versionMatch =
+ua.match(/Version\/(\d+)\.(\d+)/);
+
+if(osMatch){
+
+  ios = parseFloat(
+    `${osMatch[1]}.${osMatch[2]}`
+  );
+
+}
+
+/* iOS 26 fix */
+
+if(versionMatch){
+
+  const safariMajor =
+  parseInt(versionMatch[1]);
+
+  const safariMinor =
+  parseInt(versionMatch[2]);
+
+  if(
+    safariMajor >= 26 &&
+    ios &&
+    ios <= 18.7
+  ){
+
+    ios = parseFloat(
+      `${safariMajor}.${safariMinor}`
+    );
+
+  }
+
+}
+
+const message =
+document.getElementById("message");
+
+const button =
+document.getElementById("button");
+
+const status =
+document.getElementById("status");
+
+/* Unsupported */
+
+function unsupported(reason){
+
+  button.classList.add("disabled");
+
+  button.textContent =
+  "Unsupported";
+
+  status.textContent =
+  reason;
+
+}
+
+/* Non Apple */
+
+if(!isApple){
+
+  message.innerHTML =
+  "Skylark could not verify your device.";
+
+  unsupported(
+  "unable to verify Apple device"
+  );
+
+}
+
+/* Unknown */
+
+else if(!ios){
+
+  message.innerHTML =
+  "Skylark could not identify your iOS version.";
+
+  unsupported(
+  "unable to identify iOS version"
+  );
+
+}
+
+/* Too old */
+
+else if(ios < 14.3){
+
+  message.innerHTML =
+  "Your device is below the minimum supported version.";
+
+  unsupported(
+  "unable to support iOS below 14.3"
+  );
+
+}
+
+/* Supported */
+
+else{
+
+  let edition = null;
+  let link = "#";
+
+  if(ios >= 14.3 && ios <= 14.8){
+
+    edition = "Edition 1";
+
+    link =
+    "https://www.icloud.com/shortcuts/0e72496714944ee296007b436b4d3a8f";
+
+  }
+
+  else if(ios >= 15 && ios <= 15.8){
+
+    edition = "Edition 2";
+
+    link =
+    "https://www.icloud.com/shortcuts/65a674774ee5475cba87bb8ad822b08a";
+
+  }
+
+  else if(ios >= 16 && ios <= 16.7){
+
+    edition = "Edition 3";
+
+    link =
+    "https://www.icloud.com/shortcuts/9c5bd486f48d4448b47bf423616ce882";
+
+  }
+
+  else if(ios >= 17 && ios <= 17.7){
+
+    edition = "Edition 4";
+
+    link =
+    "https://www.icloud.com/shortcuts/8753eef694b54d13b29821ee68343e32";
+
+  }
+
+  else if(ios >= 18 && ios <= 18.7){
+
+    edition = "Edition 5";
+
+    link =
+    "https://www.icloud.com/shortcuts/1f61f828cbf14f739117c164a4b5584a";
+
+  }
+
+  else if(ios >= 26 && ios <= 26.5){
+
+    edition = "Edition 6";
+
+    link =
+    "https://www.icloud.com/shortcuts/1808f5c3a3e74087bbece8a28a219d7e";
+
+  }
+
+  /* Unknown future */
+
+  else{
+
+    message.innerHTML =
+    "Skylark could not match your iOS version.";
+
+    unsupported(
+    "unable to match supported edition"
+    );
+
+  }
+
+  /* Success */
+
+  if(edition){
+
+    message.innerHTML =
+    `Skylark <span class="edition">(${edition})</span> is your supported edition.`;
+
+    button.href = link;
+
+  }
+
+}
+
+console.log("Detected iOS:", ios);
+
+</script>
+
+</body>
+</html>
